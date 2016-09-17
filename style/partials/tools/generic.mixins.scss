@@ -1,0 +1,45 @@
+/**
+ *    GENERIC MIXINS
+ *
+ *    prefix()...............Handle vendor prefixes (Sass 3.2 fallback)
+ *    prefix()...............Handle vendor prefixes (Sass 3.3)
+ */
+
+
+
+
+ /*
+      Hande CSS vendor prefixes
+      @param {string} $property - property to prefix
+      @param {*} $value - value of property
+      @param {list} $vendors - list of vendors to prefix
+ */
+ @mixin prefix($property, $value, $vendors: (webkit moz ms o)) {
+       @if $vendors {
+         @each $vendor in $vendors {
+           #{"-" + $vendor + "-" + $property}: #{$value};
+         }
+       }
+       #{$property}: #{$value};
+ }
+
+
+
+
+
+/**
+     Hande CSS vendor prefixes
+     @param {map} $map - map of property: value to prefix
+     @param {list} $vendors - list of vendors to prefix
+*/
+@mixin prefix($map, $vendors: (webkit moz ms o)) {
+  @each $property, $value in $map {
+        @if $vendors {
+          @each $vendor in $vendors {
+            #{"-" + $vendor + "-" + $property}: #{$value};
+          }
+        }
+        // Dump regular property anyway
+        #{$property}: #{$value};
+  }
+}

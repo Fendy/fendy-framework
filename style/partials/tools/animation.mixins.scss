@@ -1,0 +1,48 @@
+/**
+ *    ANIMATION MIXINS
+ *
+ *    transition()................Prefix transition property
+ *    transform().................Prefix transform property
+ *    translate().................Prefix transform property for the translate value
+ */
+
+
+
+
+
+/*
+    Prefix the transition property
+    @param {string} $val - value for the transition property
+ */
+ @mixin transition($val){
+    @include prefix((transition: $val));
+ }
+
+
+
+
+
+/*
+    Prefix transform property
+    @param {string} $val - value for the transform property
+ */
+ @mixin transform($val) {
+     -moz-transform: $transforms;
+     -o-transform: $transforms;
+     -ms-transform: $transforms;
+     -webkit-transform: $transforms;
+     transform: $transforms;
+ }
+
+
+
+
+
+/*
+    Prefix transform property for the translate value
+    @param {string} $x - value for x translation
+    @param {string} $y - value for y translation
+ */
+ @mixin translate ($x, $y) {
+     @include transform(translate($x, $y));
+ }

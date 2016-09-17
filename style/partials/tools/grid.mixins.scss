@@ -1,0 +1,330 @@
+/**
+ *    GRID MIXINS
+ *
+ *    FLEX CONTAINER
+ *    flex()...........................Prefixes the flex value
+ *    flex-direction().................Prefixes the flex-direction property
+ *    flex-wrap()......................Prefixes the flex-wrap property
+ *    justify-content()................Prefixes the justify-content property
+ *    align-items()....................Prefixes the align-items property
+ *    align-content()..................Prefixes the align-content property
+ *
+ *    FLEX ITEMS
+ *    order()..........................Prefixes the order property
+ *    flex-grow()......................Prefixes the flex-grow property
+ *    flex-shrink()....................Prefixes the flex-shrink property
+ *    flex-basis().....................Prefixes the flex-basis property
+ *    align-self().....................Prefixes the align-self property
+ *
+ *    FUNCTIONS
+ *    create-breakpoint-variables()....Creates variables for every breakpoint (currently not supported)
+ *    include-item-row().......Defines properties for flex items in row direction
+ *    include-item-column()....Defines properties for flex items in column direction
+ *    flex-item-variants()..............Creates classes for width/height of flex items depending on the direction of the container
+ *    include-flex-item-sizes().........Define layout classes using breakpoints and grid columns
+ *    include-container-breakpoints()...Define width breakpoints for flex container
+ *    include-off-canvas-nav-widths()...Sets width breakpoints for off-canvas navigation
+ *
+ */
+
+
+
+
+
+/*
+    Prefixes the flex value
+*/
+ @mixin flex() {
+     display: -webkit-box;
+     display: -moz-box;
+     display: -ms-flexbox;
+     display: -webkit-flex;
+     display: flex;
+ }
+
+
+
+
+
+/*
+    Prefixes the flex-direction property
+    @param {string} $val - value of the flex-direction property
+ */
+ @mixin flex-direction($val) {
+ 	@include prefix((flex-direction: $val));
+ }
+
+
+
+
+
+ /*
+     Prefixes the flex-wrap property
+     @param {string} $val - value of the flex-wrap property
+  */
+ @mixin flex-wrap($val) {
+ 	@include prefix((flex-wrap: $val));
+ }
+
+
+
+
+
+ /*
+     Prefixes the justify-content property
+     @param {string} $val - value of the justify-content property
+  */
+ @mixin justify-content($val) {
+ 	@include prefix((justify-content: $val));
+ }
+
+
+
+
+
+ /*
+     Prefixes the align-items property
+     @param {string} $val - value of the align-items property
+  */
+ @mixin align-items($val) {
+ 	@include prefix((align-items: $val));
+ }
+
+
+
+
+
+ /*
+     Prefixes the align-content property
+     @param {string} $val - value of the align-content property
+  */
+ @mixin align-content($val){
+    @include prefix((align-content: $val));
+ }
+
+
+
+
+
+/*
+    Prefixes the order property
+    @param {string} $val - value of the order property
+ */
+ @mixin order($val) {
+    @include prefix((order: $val));
+ }
+
+
+
+
+
+ /*
+     Prefixes the flex-grow property
+     @param {string} $val - value of the flex-grow property
+  */
+ @mixin flex-grow($val) {
+    @include prefix((flex-grow: $val));
+ }
+
+
+
+
+
+ /*
+     Prefixes the flex-shrink property
+     @param {string} $val - value of the flex-shrink property
+  */
+ @mixin flex-shrink($val) {
+    @include prefix((flex-shrink: $val));
+ }
+
+
+
+
+
+ /*
+     Prefixes the flex-basis property
+     @param {string} $val - value of the flex-basis property
+  */
+ @mixin flex-basis($val){
+    @include prefix((flex-basis: $val));
+ }
+
+
+
+
+
+ /*
+     Prefixes the align-self property
+     @param {string} $val - value of the align-self property
+  */
+ @mixin align-self($val){
+    @include prefix((align-self: $val));
+ }
+
+
+
+
+
+ // Dynamic variables or variables interpolation are not yet supported by sass... :(
+ // @mixin include-breakpoint-variables(){
+ //     @each $label, $map in $breakpoints{
+ //         @if map-has-key($map, min){
+ //             $breakpoint-#{$label}-min: map-get-key($map, min) !global;
+ //         }
+ //         @if map-has-key($map, max){
+ //             $breakpoint-#{$label}-max: map-get-key($map, max) !global;
+ //         }
+ //     }
+ // }
+
+
+
+
+
+/*
+    Defines properties for flex items in row direction
+    @param {map} $map - Map of breakpoints to create predefined classes using media queries
+    @param {boolean} $hasGutter - indicates whether to calculate gutter margin or not and wether it should affect it's width
+    1. Breakpoint abbreviation
+    2. Column-based width from 1 to $grid-column-count
+ */
+@mixin include-item-row($map, $hasGutter){
+    @for $i from 1 to $grid-column-count + 1{   /* [2] */
+        &.#{map-get($map, abbr)}#{$i}{  /* [1] */
+            @if $hasGutter{
+                width: calc( ((100% / #{$grid-column-count}) * #{$i}) - #{$grid-column-gutter} );
+                margin: calc(#{$grid-column-gutter}/2);
+            } @else{
+                width: calc( ((100% / #{$grid-column-count}) * #{$i}));
+                margin: initial;
+            }
+            height: initial;
+        }
+    }
+}
+
+
+
+
+
+/*
+    Defines properties for flex items in column direction
+    @param {map} $map - Map of breakpoints to create predefined classes using media queries
+    @param {boolean} $hasGutter - indicates whether to calculate gutter margin or not and wether it should affect it's width
+    1. Breakpoint abbreviation
+    2. Column-based width from 1 to $grid-column-count
+ */
+@mixin include-item-column($map, $hasGutter){
+    @for $i from 1 to $grid-column-count + 1{   /* [2] */
+        &.#{map-get($map, abbr)}#{$i}{  /* [1] */
+            @if $hasGutter{
+                height: calc( ((100% / #{$grid-column-count}) * #{$i}) - #{$grid-column-gutter} );
+                margin: calc(#{$grid-column-gutter}/2);
+            } @else{
+                height: calc( ((100% / #{$grid-column-count}) * #{$i}) );
+                margin: initial;
+            }
+            width: initial;
+        }
+    }
+}
+
+
+
+
+
+/*
+    Creates classes for width/height of flex items depending on the direction of the container
+    @param {map} $map - Map of breakpoints to create predefined classes using media queries
+    1. Default direction is row so no class is needed
+    2. Direction column can be set in container using .column
+    3. If no gutter is needed use .no-gutter on container
+    4. Calls include-item-row
+    5. Calls include-item-column
+ */
+@mixin flex-item-variants($map){
+    &__item{ /* [1] */
+        @include include-item-row($map, true);  /* [4] */
+    }
+
+    &--column{
+        &__flex-item{  /* [2] */
+            @include include-item-column($map, true);   /* [5] */
+        }
+    }
+
+    &--no-gutter{
+        &__flex-item{   /* [3] */
+            @include include-item-row($map, false); /* [4] */
+        }
+    }
+
+    &--column-no-gutter{
+        &__flex-item{    /* [3] */
+            @include include-item-column($map, false);  /* [5] */
+        }
+    }
+}
+
+
+
+
+
+/*
+    Define layout classes using breakpoints and grid columns
+    1. Calls flex-item-variants
+ */
+@mixin include-flex-item-sizes(){
+    @each $label, $map in $breakpoints{
+        .flex-container {
+            @if map-has-key($map, min){
+                @media screen and (min-width: map-get($map, min)){
+                    @include flex-item-variants($map);  /* [1] */
+                }
+            } @else{
+                @include flex-item-variants($map);  /* [1] */
+            }
+        }
+    }
+}
+
+
+
+
+
+/*
+    Define width breakpoints for flex container
+ */
+@mixin include-container-breakpoints(){
+    @each $label, $map in $breakpoints{
+        @if map-has-key($grid-container-max-widths, $label){
+            @if map-has-key($map, min){
+                @media screen and (min-width: map-get($map, min)){
+                    .flex-container{
+                        max-width: map-get($grid-container-max-widths, $label);
+                    }
+                }
+            } @else{
+                .flex-container{
+                    max-width: map-get($grid-container-max-widths, $label);
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+/*
+    Sets width breakpoints for off-canvas navigation
+ */
+@mixin include-off-canvas-nav-widths(){
+    @each $label, $columns-width in $off-canvas-breakpoints{
+        @media screen and (min-width:  map-get(map-get($breakpoints, $label), min)){
+            width: calc( ((100% / #{$grid-column-count}) * #{$columns-width})) !important;
+        }
+    }
+}
