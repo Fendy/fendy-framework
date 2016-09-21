@@ -3,6 +3,7 @@
  *
  *    prefix()...............Handle vendor prefixes (Sass 3.2 fallback)
  *    prefix()...............Handle vendor prefixes (Sass 3.3)
+ *    box-sizing()...........Prefix box-sizing property
  */
 
 
@@ -42,4 +43,16 @@
         // Dump regular property anyway
         #{$property}: #{$value};
   }
+}
+
+
+
+
+
+/**
+     Prefix box-sizing property
+     @param {string} $val - value for the box-sizing property
+*/
+@mixin box-sizing($val) {
+    @include prefix((box-sizing: $val));
 }
