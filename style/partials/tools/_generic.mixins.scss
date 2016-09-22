@@ -4,6 +4,11 @@
  *    prefix()...............Handle vendor prefixes (Sass 3.2 fallback)
  *    prefix()...............Handle vendor prefixes (Sass 3.3)
  *    box-sizing()...........Prefix box-sizing property
+ *    BEVMblock()............Block handler for BEVM convention
+ *    BEVMelement()..........Element handler for BEVM convention
+ *    BEVMvariation()........Variation handler for BEVM convention
+ *    BEVMmodifier().........Modifier handler for BEVM convention
+ *    BEVMstate()............State handler for BEVM convention
  */
 
 
@@ -55,4 +60,79 @@
 */
 @mixin box-sizing($val) {
     @include prefix((box-sizing: $val));
+}
+
+
+
+
+
+/*
+    Block handler for BEVM convention
+    @param {string} $name - name of the block
+    @content - statements to include inside declaration
+ */
+@mixin BEVMblock($name) {
+    .#{$name} {
+        @content;
+    }
+}
+
+
+
+
+
+/*
+    Element handler for BEVM convention
+    @param {string} $name - name of the element
+    @content - statements to include inside declaration
+ */
+@mixin BEVMelement($name) {
+    &__#{$name} {
+        @content;
+    }
+}
+
+
+
+
+
+/*
+    Variation handler for BEVM convention
+    @param {string} $name - name of the variation
+    @content - statements to include inside declaration
+ */
+@mixin BEVMvariation($name) {
+    &--#{$name} {
+        @content;
+    }
+}
+
+
+
+
+
+/*
+    Modifier handler for BEVM convention
+    @param {string} $name - name of the modifier
+    @content - statements to include inside declaration
+ */
+@mixin BEVMmodifier($name) {
+    &-#{$name} {
+        @content;
+    }
+}
+
+
+
+
+
+/*
+    State handler for BEVM convention
+    @param {string} $name - name of the state
+    @content - statements to include inside declaration
+ */
+@mixin BEVMstate($name) {
+    &.is-#{$name} {
+        @content;
+    }
 }
