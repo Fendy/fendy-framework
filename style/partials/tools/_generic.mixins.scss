@@ -4,11 +4,16 @@
  *    prefix()...............Handle vendor prefixes (Sass 3.2 fallback)
  *    prefix()...............Handle vendor prefixes (Sass 3.3)
  *    box-sizing()...........Prefix box-sizing property
- *    BEVMblock()............Block handler for BEVM convention
- *    BEVMelement()..........Element handler for BEVM convention
- *    BEVMvariation()........Variation handler for BEVM convention
- *    BEVMmodifier().........Modifier handler for BEVM convention
- *    BEVMstate()............State handler for BEVM convention
+ *    bevm-block()...........Block handler for BEVM convention
+ *    bevm-element().........Element handler for BEVM convention
+ *    bevm-variation().......Variation handler for BEVM convention
+ *    bevm-modifier()........Modifier handler for BEVM convention
+ *    state-class()..........State handler (See Chainable BEM modifiers)
+ *    helper-class().........Helper handler (See Chainable BEM modifiers)
+ *
+ *
+ *    More on bevm-: http://es.slideshare.net/Jyaasa/bevm--blockelementvariation-modifier
+ *    More on Chainable BEM modifiers: http://webuild.envato.com/blog/chainable-bem-modifiers/
  */
 
 
@@ -71,7 +76,7 @@
     @param {string} $name - name of the block
     @content - statements to include inside declaration
  */
-@mixin BEVMblock($name) {
+@mixin bevm-block($name) {
     .#{$name} {
         @content;
     }
@@ -86,7 +91,7 @@
     @param {string} $name - name of the element
     @content - statements to include inside declaration
  */
-@mixin BEVMelement($name) {
+@mixin bevm-element($name) {
     &__#{$name} {
         @content;
     }
@@ -101,7 +106,7 @@
     @param {string} $name - name of the variation
     @content - statements to include inside declaration
  */
-@mixin BEVMvariation($name) {
+@mixin bevm-variation($name) {
     &--#{$name} {
         @content;
     }
@@ -116,7 +121,7 @@
     @param {string} $name - name of the modifier
     @content - statements to include inside declaration
  */
-@mixin BEVMmodifier($name) {
+@mixin bevm-modifier($name) {
     &-#{$name} {
         @content;
     }
@@ -127,12 +132,27 @@
 
 
 /*
-    State handler for BEVM convention
+    State handler
     @param {string} $name - name of the state
     @content - statements to include inside declaration
  */
-@mixin BEVMstate($name) {
+@mixin state-class($name) {
     &.is-#{$name} {
+        @content;
+    }
+}
+
+
+
+
+
+/*
+    Helper handler 
+    @param {string} $name - name of the helper
+    @content - statements to include inside declaration
+ */
+@mixin helper-class($name) {
+    &.h-#{$name} {
         @content;
     }
 }
