@@ -11,6 +11,9 @@
 
 /*
      Creates variables for font weights defined in $font-weights. If no value is provided the font-weight variables is skipped
+     ----------------------------------------
+     @access public
+     ----------------------------------------
 */
 @mixin add-weight-variables() {
     @if map-has-key($font-weights, thin) {
