@@ -18,10 +18,9 @@
  *
  *    FUNCTIONS
  *    create-breakpoint-variables()....Creates variables for every breakpoint (currently not supported)
- *    include-item-row().......Defines properties for flex items in row direction
- *    include-item-column()....Defines properties for flex items in column direction
- *    flex-item-variants()..............Creates classes for width/height of flex items depending on the direction of the container
- *    include-flex-item-sizes().........Define layout classes using breakpoints and grid columns
+ *    _flex-row-item().................Includes width and margin of row oriented flex-item
+ *    _flex-column-item()...............Includes height and margin of row column flex-item
+ *    include-grid()....................Define layout classes using breakpoints and grid columns
  *    include-container-breakpoints()...Define width breakpoints for flex container
  *    include-off-canvas-nav-widths()...Sets width breakpoints for off-canvas navigation
  *
@@ -31,8 +30,15 @@
 
 
 
+/***************************\
+    #FLEX-CONTAINER
+\***************************/
+
 /*
     Prefixes the flex value
+    ----------------------------------------
+    @access public
+    ----------------------------------------
 */
  @mixin flex() {
      display: -webkit-box;
@@ -48,6 +54,9 @@
 
 /*
     Prefixes the flex-direction property
+    ----------------------------------------
+    @access public
+    ----------------------------------------
     @param {string} $val - value of the flex-direction property
  */
  @mixin flex-direction($val) {
@@ -60,6 +69,9 @@
 
  /*
      Prefixes the flex-wrap property
+     ----------------------------------------
+     @access public
+     ----------------------------------------
      @param {string} $val - value of the flex-wrap property
   */
  @mixin flex-wrap($val) {
@@ -72,6 +84,9 @@
 
  /*
      Prefixes the justify-content property
+     ----------------------------------------
+     @access public
+     ----------------------------------------
      @param {string} $val - value of the justify-content property
   */
  @mixin justify-content($val) {
@@ -84,6 +99,9 @@
 
  /*
      Prefixes the align-items property
+     ----------------------------------------
+     @access public
+     ----------------------------------------
      @param {string} $val - value of the align-items property
   */
  @mixin align-items($val) {
@@ -96,6 +114,9 @@
 
  /*
      Prefixes the align-content property
+     ----------------------------------------
+     @access public
+     ----------------------------------------
      @param {string} $val - value of the align-content property
   */
  @mixin align-content($val){
@@ -106,8 +127,15 @@
 
 
 
+ /***************************\
+     #FLEX-ITEMS
+ \***************************/
+
 /*
     Prefixes the order property
+    ----------------------------------------
+    @access public
+    ----------------------------------------
     @param {string} $val - value of the order property
  */
  @mixin order($val) {
@@ -120,6 +148,9 @@
 
  /*
      Prefixes the flex-grow property
+     ----------------------------------------
+     @access public
+     ----------------------------------------
      @param {string} $val - value of the flex-grow property
   */
  @mixin flex-grow($val) {
@@ -132,6 +163,9 @@
 
  /*
      Prefixes the flex-shrink property
+     ----------------------------------------
+     @access public
+     ----------------------------------------
      @param {string} $val - value of the flex-shrink property
   */
  @mixin flex-shrink($val) {
@@ -144,6 +178,9 @@
 
  /*
      Prefixes the flex-basis property
+     ----------------------------------------
+     @access public
+     ----------------------------------------
      @param {string} $val - value of the flex-basis property
   */
  @mixin flex-basis($val){
@@ -156,6 +193,9 @@
 
  /*
      Prefixes the align-self property
+     ----------------------------------------
+     @access public
+     ----------------------------------------
      @param {string} $val - value of the align-self property
   */
  @mixin align-self($val){
@@ -165,6 +205,10 @@
 
 
 
+
+ /***************************\
+     #FUNCTIONS
+ \***************************/
 
  // Dynamic variables or variables interpolation are not yet supported by sass... :(
  // @mixin include-breakpoint-variables(){
@@ -183,23 +227,24 @@
 
 
 /*
-    Defines properties for flex items in row direction
-    @param {map} $map - Map of breakpoints to create predefined classes using media queries
-    @param {boolean} $hasGutter - indicates whether to calculate gutter margin or not and wether it should affect it's width
-    1. Breakpoint abbreviation
-    2. Column-based width from 1 to $grid-column-count
+    Includes width and margin of row oriented flex-item
+    ----------------------------------------
+    @access private
+    ----------------------------------------
+    @param {map} $map - parameters of breakpoints
+    @param {int} $i - counter of columns
+    @param {boolean} $hasGutter - wether gutter should be included or not
  */
-@mixin include-item-row($map, $hasGutter){
-    @for $i from 1 to $grid-column-count + 1{   /* [2] */
-        &.#{map-get($map, abbr)}#{$i}{  /* [1] */
-            @if $hasGutter{
-                width: calc( ((100% / #{$grid-column-count}) * #{$i}) - #{$grid-column-gutter} );
-                margin: calc(#{$grid-column-gutter}/2);
-            } @else{
-                width: calc( ((100% / #{$grid-column-count}) * #{$i}));
-                margin: initial;
-            }
-            height: initial;
+@mixin _flex-row-item($map, $i, $hasGutter){
+    @if $hasGutter{
+        @include bevm-modifier(map-get($map, abbr)#{$i}){
+            width: calc( ((100% / #{$grid-column-count}) * #{$i}) - #{$grid-column-gutter} );
+            margin: calc(#{$grid-column-gutter}/2);
+        }
+    }@else{
+        @include bevm-modifier(map-get($map, abbr)#{$i}){
+            width: calc( ((100% / #{$grid-column-count}) * #{$i}));
+            margin: initial;
         }
     }
 }
@@ -209,60 +254,24 @@
 
 
 /*
-    Defines properties for flex items in column direction
-    @param {map} $map - Map of breakpoints to create predefined classes using media queries
-    @param {boolean} $hasGutter - indicates whether to calculate gutter margin or not and wether it should affect it's width
-    1. Breakpoint abbreviation
-    2. Column-based width from 1 to $grid-column-count
+    Includes height and margin of column oriented flex-item
+    ----------------------------------------
+    @access private
+    ----------------------------------------
+    @param {map} $map - parameters of breakpoints
+    @param {int} $i - counter of columns
+    @param {boolean} $hasGutter - wether gutter should be included or not
  */
-@mixin include-item-column($map, $hasGutter){
-    @for $i from 1 to $grid-column-count + 1{   /* [2] */
-        &.#{map-get($map, abbr)}#{$i}{  /* [1] */
-            @if $hasGutter{
-                height: calc( ((100% / #{$grid-column-count}) * #{$i}) - #{$grid-column-gutter} );
-                margin: calc(#{$grid-column-gutter}/2);
-            } @else{
-                height: calc( ((100% / #{$grid-column-count}) * #{$i}) );
-                margin: initial;
-            }
-            width: initial;
+@mixin _flex-column-item($map, $i, $hasGutter){
+    @if $hasGutter{
+        @include bevm-modifier(map-get($map, abbr)#{$i}){
+            height: calc( ((100% / #{$grid-column-count}) * #{$i}) - #{$grid-column-gutter} );
+            margin: calc(#{$grid-column-gutter}/2);
         }
-    }
-}
-
-
-
-
-
-/*
-    Creates classes for width/height of flex items depending on the direction of the container
-    @param {map} $map - Map of breakpoints to create predefined classes using media queries
-    1. Default direction is row so no class is needed
-    2. Direction column can be set in container using .column
-    3. If no gutter is needed use .no-gutter on container
-    4. Calls include-item-row
-    5. Calls include-item-column
- */
-@mixin flex-item-variants($map){
-    &__item{ /* [1] */
-        @include include-item-row($map, true);  /* [4] */
-    }
-
-    &--column{
-        &__flex-item{  /* [2] */
-            @include include-item-column($map, true);   /* [5] */
-        }
-    }
-
-    &--no-gutter{
-        &__flex-item{   /* [3] */
-            @include include-item-row($map, false); /* [4] */
-        }
-    }
-
-    &--column-no-gutter{
-        &__flex-item{    /* [3] */
-            @include include-item-column($map, false);  /* [5] */
+    }@else{
+        @include bevm-modifier(map-get($map, abbr)#{$i}){
+            height: calc( ((100% / #{$grid-column-count}) * #{$i}) );
+            margin: initial;
         }
     }
 }
@@ -273,17 +282,92 @@
 
 /*
     Define layout classes using breakpoints and grid columns
-    1. Calls flex-item-variants
+    ----------------------------------------
+    @access public
+    ----------------------------------------
+    1) Creates a block called flex
+    2) Creates an element of flex called item
+    3) Loops through every breakpoint
+    4) If smartphone, creates classes <breakpoint><# of columns>
+    5) Loops from 1 to $grid-column-count
+    6) Else, create the classes inside media query
+    7) Create flex variation called column
+    8) Creates an element of flex called item
+    9) Loops through every breakpoint
+    10) Loops from 1 to $grid-column-count
+    11) If smartphone, creates classes <breakpoint><# of columns>
+    12) Else, create the classes inside media query
  */
-@mixin include-flex-item-sizes(){
-    @each $label, $map in $breakpoints{
-        .flex-container {
-            @if map-has-key($map, min){
-                @media screen and (min-width: map-get($map, min)){
-                    @include flex-item-variants($map);  /* [1] */
+@mixin include-grid(){
+    @include bevm-block(flex){
+
+        @include bevm-element(item){
+            @each $label, $map in $breakpoints{
+                @if $label == smartphone {
+                    @for $i from 1 to $grid-column-count + 1{
+                        @include _flex-row-item($map, $i, true);
+                    }
+                }@else{
+                    @media screen and (min-width: map-get($map, min)){
+                        @for $i from 1 to $grid-column-count + 1{
+                            @include _flex-row-item($map, $i, true);
+                        }
+                    }
                 }
-            } @else{
-                @include flex-item-variants($map);  /* [1] */
+            }
+        }
+
+        @include bevm-variation(column){
+            @include bevm-element(item){
+                @each $label, $map in $breakpoints{
+                    @if $label == smartphone {
+                        @for $i from 1 to $grid-column-count + 1{
+                            @include _flex-column-item($map, $i, true);
+                        }
+                    }@else{
+                        @media screen and (min-width: map-get($map, min)){
+                            @for $i from 1 to $grid-column-count + 1{
+                                @include _flex-column-item($map, $i, true);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        @include bevm-variation(ng){
+            @include bevm-element(item){
+                @each $label, $map in $breakpoints{
+                    @if $label == smartphone {
+                        @for $i from 1 to $grid-column-count + 1{
+                            @include _flex-row-item($map, $i, false);
+                        }
+                    }@else{
+                        @media screen and (min-width: map-get($map, min)){
+                            @for $i from 1 to $grid-column-count + 1{
+                                @include _flex-row-item($map, $i, false);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        @include bevm-variation(col-ng){
+            @include bevm-element(item){
+                @each $label, $map in $breakpoints{
+                    @if $label == smartphone {
+                        @for $i from 1 to $grid-column-count + 1{
+                            @include _flex-column-item($map, $i, false);
+                        }
+                    }@else{
+                        @media screen and (min-width: map-get($map, min)){
+                            @for $i from 1 to $grid-column-count + 1{
+                                @include _flex-column-item($map, $i, false);
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -295,6 +379,9 @@
 
 /*
     Define width breakpoints for flex container
+    ----------------------------------------
+    @access public
+    ----------------------------------------
  */
 @mixin include-container-breakpoints(){
     @each $label, $map in $breakpoints{
@@ -320,6 +407,9 @@
 
 /*
     Sets width breakpoints for off-canvas navigation
+    ----------------------------------------
+    @access public
+    ----------------------------------------
  */
 @mixin include-off-canvas-nav-widths(){
     @each $label, $columns-width in $off-canvas-breakpoints{
