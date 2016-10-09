@@ -23,6 +23,7 @@
  *    include-grid()....................Define layout classes using breakpoints and grid columns
  *    include-container-breakpoints()...Define width breakpoints for flex container
  *    include-off-canvas-nav-widths()...Sets width breakpoints for off-canvas navigation
+ *    include-offset-classes()..........Creates classes for offset for every breakpoint
  *
  */
 
@@ -423,6 +424,34 @@
     @each $label, $columns-width in $off-canvas-breakpoints{
         @media screen and (min-width:  map-get(map-get($breakpoints, $label), min)){
             width: calc( ((100% / #{$grid-column-count}) * #{$columns-width})) !important;
+        }
+    }
+}
+
+
+
+/*
+    Creates classes for offset for every breakpoint
+    ----------------------------------------
+    @access public
+    ----------------------------------------
+ */
+@mixin include-offset-classes(){
+    @each $label, $map in $breakpoints{
+        @if $label == smartphone {
+            @for $i from 1 to $grid-column-count + 1{
+                .offset-#{map-get($map, abbr)}#{$i}{
+                    margin-left: calc( (100%/#{$grid-column-count}) * #{$i});
+                }
+            }
+        }@else{
+            @media screen and (min-width: map-get($map, min)){
+                @for $i from 1 to $grid-column-count + 1{
+                    .offset-#{map-get($map, abbr)}#{$i}{
+                        margin-left: calc( (100%/#{$grid-column-count}) * #{$i});
+                    }
+                }
+            }
         }
     }
 }
