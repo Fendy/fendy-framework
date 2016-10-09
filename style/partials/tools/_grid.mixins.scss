@@ -287,27 +287,27 @@
     ----------------------------------------
     1) Creates a block called flex
     2) Creates an element of flex called item
-    3) Loops through every breakpoint
-    4) If smartphone, creates classes <breakpoint><# of columns>
-    5) Loops from 1 to $grid-column-count
-    6) Else, create the classes inside media query
-    7) Create flex variation called column
-    8) Creates an element of flex called item
-    9) Loops through every breakpoint
-    10) Loops from 1 to $grid-column-count
-    11) If smartphone, creates classes <breakpoint><# of columns>
-    12) Else, create the classes inside media query
+    3) Loops through every breakpoint defined in $breakpoints
+    4) If smartphone, loops from 1 to $grid-column-count creates classes <breakpoint><# of columns>
+    5) Else, loops from 1 to $grid-column-count creates classes <breakpoint><# of columns> inside media query
+    6) Creates flex variation called column
+    7) Creates flex variation called ng (no-gutter)
+    8) Creates flex variation called col-ng (column no-gutter)
  */
 @mixin include-grid(){
-    @include bevm-block(flex){
 
-        @include bevm-element(item){
-            @each $label, $map in $breakpoints{
-                @if $label == smartphone {
+    @include bevm-block(flex){  /* [1] */
+        @include flex-direction(row);
+        @include bevm-modifier(reverse){ @include flex-direction(row-reverse);}
+
+        @include bevm-element(item){    /* [2] */
+
+            @each $label, $map in $breakpoints{     /* [3] */
+                @if $label == smartphone {      /* [4] */
                     @for $i from 1 to $grid-column-count + 1{
                         @include _flex-row-item($map, $i, true);
                     }
-                }@else{
+                }@else{     /* [5] */
                     @media screen and (min-width: map-get($map, min)){
                         @for $i from 1 to $grid-column-count + 1{
                             @include _flex-row-item($map, $i, true);
@@ -317,14 +317,18 @@
             }
         }
 
-        @include bevm-variation(column){
-            @include bevm-element(item){
-                @each $label, $map in $breakpoints{
-                    @if $label == smartphone {
+        @include bevm-variation(column){        /* [6] */
+            @include flex-direction(column);
+            @include bevm-modifier(reverse){ @include flex-direction(column-reverse);}
+
+            @include bevm-element(item){        /* [2] */
+
+                @each $label, $map in $breakpoints{     /* [3] */
+                    @if $label == smartphone {      /* [4] */
                         @for $i from 1 to $grid-column-count + 1{
                             @include _flex-column-item($map, $i, true);
                         }
-                    }@else{
+                    }@else{     /* [5] */
                         @media screen and (min-width: map-get($map, min)){
                             @for $i from 1 to $grid-column-count + 1{
                                 @include _flex-column-item($map, $i, true);
@@ -335,14 +339,15 @@
             }
         }
 
-        @include bevm-variation(ng){
-            @include bevm-element(item){
-                @each $label, $map in $breakpoints{
-                    @if $label == smartphone {
+        @include bevm-variation(ng){       /* [7] */
+            @include bevm-element(item){        /* [2] */
+
+                @each $label, $map in $breakpoints{     /* [3] */
+                    @if $label == smartphone {      /* [4] */
                         @for $i from 1 to $grid-column-count + 1{
                             @include _flex-row-item($map, $i, false);
                         }
-                    }@else{
+                    }@else{     /* [5] */
                         @media screen and (min-width: map-get($map, min)){
                             @for $i from 1 to $grid-column-count + 1{
                                 @include _flex-row-item($map, $i, false);
@@ -353,14 +358,17 @@
             }
         }
 
-        @include bevm-variation(col-ng){
-            @include bevm-element(item){
-                @each $label, $map in $breakpoints{
-                    @if $label == smartphone {
+        @include bevm-variation(col-ng){        /* [8]] */
+            @include bevm-modifier(reverse){ @include flex-direction(column-reverse);}
+
+            @include bevm-element(item){        /* [2] */
+
+                @each $label, $map in $breakpoints{     /* [3] */
+                    @if $label == smartphone {      /* [4] */
                         @for $i from 1 to $grid-column-count + 1{
                             @include _flex-column-item($map, $i, false);
                         }
-                    }@else{
+                    }@else{     /* [5] */
                         @media screen and (min-width: map-get($map, min)){
                             @for $i from 1 to $grid-column-count + 1{
                                 @include _flex-column-item($map, $i, false);
