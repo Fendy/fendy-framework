@@ -1,0 +1,126 @@
+/**
+ *    GRID
+ *
+ *    Layout......................Creates grid layout
+ *    Off-canvas..................Structure for off-canvas navigation
+ */
+
+
+
+
+
+ /*********************************\
+     #LAYOUT
+ \*********************************/
+
+@include include-grid();
+
+.flex,
+.flex--column,
+.flex--ng,
+.flex--col-ng{
+    width: 100%;
+    height: auto;
+    margin: auto;
+    @include flex();
+    @include flex-wrap($flexbox-wrap-default);
+    @include justify-content($flexbox-justify-content-default);
+    @include align-items($flexbox-align-items-default);
+    @include align-content($flexbox-align-content-default);
+
+
+    @include bevm-modifier(nowrap){ @include flex-wrap(nowrap);}
+
+    @include bevm-modifier(wrap-reverse){ @include flex-wrap(wrap-reverse);}
+
+    @include bevm-modifier(justify-end){ @include justify-content(flex-end);}
+
+    @include bevm-modifier(justify-center){ @include justify-content(center);}
+
+    @include bevm-modifier(justify-between){ @include justify-content(space-between);}
+
+    @include bevm-modifier(justify-around){ @include justify-content(space-around);}
+
+    @include bevm-modifier(align-items-start){ @include align-items(flex-start);}
+
+    @include bevm-modifier(align-items-end){ @include align-items(flex-end);}
+
+    @include bevm-modifier(align-items-center){ @include align-items(center);}
+
+    @include bevm-modifier(align-items-baseline){ @include align-items(baseline);}
+
+    @include bevm-modifier(align-content-start){ @include align-content(flex-start);}
+
+    @include bevm-modifier(align-content-end){ @include align-content(flex-end);}
+
+    @include bevm-modifier(align-content-center){ @include align-content(center);}
+
+    @include bevm-modifier(align-content-between){ @include align-content(space-between);}
+
+    @include bevm-modifier(align-content-around){ @include align-content(space-around);}
+}
+
+.flex__item,
+.flex--column__item,
+.flex--ng__item,
+.flex--col-ng__item{
+    @include order(0);
+    @include flex-grow(0);
+    @include flex-shrink(0);
+    @include flex-basis(auto);
+    @include align-self(auto);
+}
+
+@include include-container-breakpoints();
+
+
+
+
+
+/*********************************\
+    #OFF-CANVAS
+\*********************************/
+
+@include bevm-block(off-canvas){
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    @include bevm-element(nav){
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        transform: translate(-100%, 0);
+        transition: $global-animation;
+
+        @include include-off-canvas-nav-widths();
+
+        @include state-class(open){
+            transform: translate(0, 0);
+        }
+    }
+
+    @include bevm-element(main){
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    @media screen and (min-width: $off-canvas-static-breakpoint){
+        @include flex();
+        @include flex-wrap(nowrap);
+        @include justify-content($flexbox-justify-content-default);
+        @include align-items($flexbox-align-items-default);
+        @include align-content($flexbox-align-content-default);
+        @include flex-direction(row);
+
+        @include bevm-element(nav){
+            position: relative;
+            transform: translate(0, 0);
+        }
+
+        @include bevm-element(main){
+            @include flex-grow(1);
+        }
+    }
+}
