@@ -3,6 +3,7 @@
  *
  *    Layout......................Creates grid layout
  *    Off-canvas..................Structure for off-canvas navigation
+ *    Offset......................Classes for offsets
  */
 
 
@@ -124,3 +125,13 @@
         }
     }
 }
+
+
+
+
+
+/*********************************\
+    #OFF-CANVAS
+\*********************************/
+
+@include include-offset-classes();
