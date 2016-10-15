@@ -21,7 +21,7 @@ h6, .h6{
     font-weight: $font-weight-bold;
     color: inherit;
     line-height: $line-height-header;
-    margin-bottom: $header-margin-bottom;
+    margin-bottom: 0.5em;
 }
 
 @each $header, $size in $header-sizes{
@@ -40,11 +40,11 @@ h6, .h6{
 
 .hero1, .hero2,
 .hero3{
-     font-family: $heroheader-font-family;
-     font-weight: $heroheader-font-weight;
+     font-family: $font-family-secondary;
+     font-weight: $font-weight-bold;
      color: inherit;
-     line-height: $header-line-height;
-     margin-bottom: $header-margin-bottom;
+     line-height: $line-height-header;
+     margin-bottom: 0.5em;
  }
 
  @each $header, $size in $heroheader-sizes{
@@ -64,9 +64,9 @@ h6, .h6{
  @each $header, $size in $subheader-sizes{
      #{$header}.subheader, #{$header} span{
          font-size: $size !important;
-         color: $color-medium-black;
-         font-weight: $subheader-font-weight;
-         margin-bottom: $header-margin-bottom;
+         color: $color-text;
+         font-weight: $font-weight-bold;
+         margin-bottom: 0.5em;
      }
  }
 
@@ -82,6 +82,7 @@ p{
     font-weight: $global-font-weight;
     line-height: $global-line-height;
     color: inherit;
+    margin-bottom: 0.5em;
 }
 
  p.p--lead{

@@ -13,7 +13,7 @@
  }
 
  html{
-     font-family: sans-serif;
+     font-family: $system-font-stack;
      -ms-text-size-adjust: 100%;
      -webkit-text-size-adjust: 100%;
      font-size: 100%;
@@ -31,7 +31,7 @@
      -moz-osx-font-smoothing: grayscale;
  	 font-smoothing: antialiased;
      color: $color-text;
-     line-height: $line-height-body
+     line-height: $line-height-body;
  }
 
  img, embed,
