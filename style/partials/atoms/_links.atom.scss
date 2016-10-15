@@ -1,0 +1,230 @@
+/**
+ *    LINKS
+ *    1. Basic preset for anchor element
+ *    2. Create bevm element
+ *    3. Create underline variation
+ *    4. Create awesome variation
+ *    5. Create btn variation
+ *    6. Create btn-ghost variation
+ */
+
+a{    /* [1] */
+    @include transition($global-animation);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    font-weight: inherit;
+}
+
+
+@include bevm-block(link){      /* [2] */
+    @extend a;
+    color: $color-text;
+
+    @include bevm-modifier(color-light){
+        color: $color-text-light;
+        &:hover{ color: $color-text;}
+    }
+
+    @include bevm-modifier(color-reversed){
+        color: $color-text-white;
+        &:hover{ color: $color-text-white-light;}
+    }
+
+    @include bevm-modifier(color-lightReversed){
+        color: $color-text-white-light;
+        &:hover{ color: $color-text-white;}
+    }
+
+    @include bevm-modifier(color-primary){
+        color: $color-brand-primary;
+    }
+
+    &:hover{color: $color-text-light;}
+
+    @include bevm-variation(underline){     /* [3] */
+        color: $color-text;
+        border-bottom: 2px solid $color-text;
+
+        @include bevm-modifier(color-light){
+            color: $color-text-light;
+            border-bottom-color: $color-text-light;
+            &:hover{ color: $color-text; border-bottom-color: $color-text;}
+        }
+
+        @include bevm-modifier(color-reversed){
+            color: $color-text-white;
+            border-bottom-color: $color-text-white;
+            &:hover{ color: $color-text-white-light; border-bottom-color: $color-text-white-light}
+        }
+
+        @include bevm-modifier(color-lightReversed){
+            color: $color-text-white-light;
+            border-bottom-color: $color-text-white-light;
+            &:hover{ color: $color-text-white; border-bottom-color: $color-text-white;}
+        }
+
+        @include bevm-modifier(color-primary){
+            color: $color-brand-primary;
+            border-bottom-color: $color-brand-primary;
+            &:hover{ border-bottom-color: $color-text-light;}
+        }
+
+        &:hover{
+            color: $color-text-light;
+            border-bottom-color: $color-text-light;
+        }
+    }
+
+    @include bevm-variation(awesome){       /* [4] */
+        display: inline-block;
+        position: relative;
+        color: $color-text;
+
+        &:before{
+            @include transition(width $global-animation-duration $global-animation-timing);
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            background-color: $color-text-light;
+        }
+
+        &:hover{
+            color: $color-text-light;
+        }
+
+        &:hover:before{
+            width: 100%;
+        }
+
+        @include bevm-modifier(color-light){
+            color: $color-text-light;
+            &:before{background-color: $color-text;}
+            &:hover{ color: $color-text;}
+        }
+
+        @include bevm-modifier(color-reversed){
+            color: $color-text-white;
+            &:before{background-color: $color-text-white-light;}
+            &:hover{ color:$color-text-white-light;}
+        }
+
+        @include bevm-modifier(color-lightReversed){
+            color: $color-text-white-light;
+            &:before{background-color: $color-text-white;}
+            &:hover{ color: $color-text-white;}
+        }
+
+        @include bevm-modifier(color-primary){
+            color: $color-brand-primary;
+            &:before{background-color: $color-brand-primary;}
+        }
+    }
+
+    @include bevm-variation(btn){       /* [5] */
+        display: inline-block;
+        color: $color-text;
+        background-color: $color-brand-grey-light;
+        padding: $global-btn-padding;
+
+        &:hover{
+            background-color: $color-brand-grey;
+        }
+
+        @include bevm-modifier(color-black){
+            color: $color-text-white;
+            background-color: $color-text;
+
+            &:hover{
+                background-color: rgba($color-text, 0.75);
+            }
+        }
+
+        @include bevm-modifier(color-white){
+            color: $color-text;
+            background-color: $color-text-white;
+
+            &:hover{
+                background-color: rgba($color-text-white, 0.75);
+            }
+        }
+
+        @include bevm-modifier(color-primary){
+            color: $color-text-white;
+            background-color: $color-brand-primary;
+
+            &:hover{
+                background-color: rgba($color-brand-primary, 0.75);
+            }
+        }
+
+        @include bevm-modifier(rounded){
+            border-radius: 10em;
+        }
+    }
+
+    @include bevm-variation(btn-ghost){     /* [6] */
+        display: inline-block;
+        color: $color-text;
+        padding: $global-btn-padding;
+        border: 2px solid $color-text;
+
+        @include bevm-modifier(color-light){
+            color: $color-text-light;
+            border-color: $color-text-light;
+
+            &:hover{
+                color: $color-text;
+                background-color: $color-text-light;
+                border-color: transparent;
+            }
+        }
+
+        @include bevm-modifier(color-reversed){
+            color: $color-text-white;
+            border-color: $color-text-white;
+
+            &:hover{
+                color: $color-text;
+                background-color: $color-text-white;
+                border-color: transparent;
+            }
+        }
+
+        @include bevm-modifier(color-lightReversed){
+            color: $color-text-white-light;
+            border-color: $color-text-white-light;
+
+            &:hover{
+                color: $color-text;
+                background-color: $color-text-white;
+                border-color: transparent;
+            }
+        }
+
+        @include bevm-modifier(color-primary){
+            color: $color-brand-primary;
+            border-color: $color-brand-primary;
+
+            &:hover{
+                color: $color-text-white;
+                background-color: $color-brand-primary;
+                border-color: transparent;
+            }
+        }
+
+        @include bevm-modifier(rounded){
+            border-radius: 10em;
+        }
+
+        &:hover{
+            color: $color-text-white;
+            background-color: $color-text;
+        }
+    }
+}
