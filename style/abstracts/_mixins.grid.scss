@@ -1,35 +1,29 @@
-/**
- *    GRID MIXINS
- *
- *    FLEX CONTAINER
- *    flex()...........................Prefixes the flex value
- *    flex-direction().................Prefixes the flex-direction property
- *    flex-wrap()......................Prefixes the flex-wrap property
- *    justify-content()................Prefixes the justify-content property
- *    align-items()....................Prefixes the align-items property
- *    align-content()..................Prefixes the align-content property
- *
- *    FLEX ITEMS
- *    order()..........................Prefixes the order property
- *    flex-grow()......................Prefixes the flex-grow property
- *    flex-shrink()....................Prefixes the flex-shrink property
- *    flex-basis().....................Prefixes the flex-basis property
- *    align-self().....................Prefixes the align-self property
- *
- *    FUNCTIONS
- *    create-breakpoint-variables()....Creates variables for every breakpoint (currently not supported)
- *    _flex-row-item().................Includes width and margin of row oriented flex-item
- *    _flex-column-item()...............Includes height and margin of row column flex-item
- *    include-grid()....................Define layout classes using breakpoints and grid columns
- *    include-container-breakpoints()...Define width breakpoints for flex container
- *    include-off-canvas-nav-widths()...Sets width breakpoints for off-canvas navigation
- *    include-offset-classes()..........Creates classes for offset for every breakpoint
- *
- */
-
-
-
-
+//------------------------------------------------------------------------------
+//  This file contains useful grid mixins
+//------------------------------------------------------------------------------
+//  FLEX CONTAINER
+//  flex()...........................Prefixes the flex value
+//  flex-direction().................Prefixes the flex-direction property
+//  flex-wrap()......................Prefixes the flex-wrap property
+//  justify-content()................Prefixes the justify-content property
+//  align-items()....................Prefixes the align-items property
+//  align-content()..................Prefixes the align-content property
+//
+//  FLEX ITEMS
+//  order()..........................Prefixes the order property
+//  flex-grow()......................Prefixes the flex-grow property
+//  flex-shrink()....................Prefixes the flex-shrink property
+//  flex-basis().....................Prefixes the flex-basis property
+//  align-self().....................Prefixes the align-self property
+//
+//  FUNCTIONS
+//  add-breakpoint-variables()....Creates variables for every breakpoint (currently not supported)
+//  _flex-row-item()..............Includes width and margin of row oriented flex-item
+//  _flex-column-item()...........Includes height and margin of row column flex-item
+//  add-grid()....................Define layout classes using breakpoints and grid columns
+//  add-container-breakpoints()...Define width breakpoints for flex container
+//  add-off-canvas-nav-widths()...Sets width breakpoints for off-canvas navigation
+//  add-offset-classes()..........Creates classes for offset for every breakpoint
 
 /***************************\
     #FLEX-CONTAINER
@@ -212,7 +206,7 @@
  \***************************/
 
  // Dynamic variables or variables interpolation are not yet supported by sass... :(
- // @mixin include-breakpoint-variables(){
+ // @mixin add-breakpoint-variables(){
  //     @each $label, $map in $breakpoints{
  //         @if map-has-key($map, min){
  //             $breakpoint-#{$label}-min: map-get-key($map, min) !global;
@@ -227,7 +221,7 @@
 
 
 
-/*
+ /*
     Includes width and margin of row oriented flex-item
     ----------------------------------------
     @access private
@@ -236,7 +230,7 @@
     @param {int} $i - counter of columns
     @param {boolean} $hasGutter - wether gutter should be included or not
  */
-@mixin _flex-row-item($map, $i, $hasGutter){
+ @mixin _flex-row-item($map, $i, $hasGutter){
     @if $hasGutter{
         @include bevm-modifier(map-get($map, abbr)#{$i}){
             width: calc( ((100% / #{$grid-column-count}) * #{$i}) - #{$grid-column-gutter} );
@@ -248,13 +242,13 @@
             margin: initial;
         }
     }
-}
+ }
 
 
 
 
 
-/*
+ /*
     Includes height and margin of column oriented flex-item
     ----------------------------------------
     @access private
@@ -263,7 +257,7 @@
     @param {int} $i - counter of columns
     @param {boolean} $hasGutter - wether gutter should be included or not
  */
-@mixin _flex-column-item($map, $i, $hasGutter){
+ @mixin _flex-column-item($map, $i, $hasGutter){
     @if $hasGutter{
         @include bevm-modifier(map-get($map, abbr)#{$i}){
             height: calc( ((100% / #{$grid-column-count}) * #{$i}) - #{$grid-column-gutter} );
@@ -275,13 +269,13 @@
             margin: initial;
         }
     }
-}
+ }
 
 
 
 
 
-/*
+ /*
     Define layout classes using breakpoints and grid columns
     ----------------------------------------
     @access public
@@ -295,7 +289,7 @@
     7) Creates flex variation called ng (no-gutter)
     8) Creates flex variation called col-ng (column no-gutter)
  */
-@mixin include-grid(){
+ @mixin add-grid(){
 
     @include bevm-block(flex){  /* [1] */
         @include flex-direction(row);
@@ -380,19 +374,19 @@
             }
         }
     }
-}
+ }
 
 
 
 
 
-/*
+ /*
     Define width breakpoints for flex container
     ----------------------------------------
     @access public
     ----------------------------------------
  */
-@mixin include-container-breakpoints(){
+ @mixin add-container-breakpoints(){
     @each $label, $map in $breakpoints{
         @if map-has-key($grid-container-max-widths, $label){
             @if map-has-key($map, min){
@@ -408,35 +402,35 @@
             }
         }
     }
-}
+ }
 
 
 
 
 
-/*
+ /*
     Sets width breakpoints for off-canvas navigation
     ----------------------------------------
     @access public
     ----------------------------------------
  */
-@mixin include-off-canvas-nav-widths(){
+ @mixin add-off-canvas-nav-widths(){
     @each $label, $columns-width in $off-canvas-breakpoints{
         @media screen and (min-width:  map-get(map-get($breakpoints, $label), min)){
             width: calc( ((100% / #{$grid-column-count}) * #{$columns-width})) !important;
         }
     }
-}
+ }
 
 
 
-/*
+ /*
     Creates classes for offset for every breakpoint
     ----------------------------------------
     @access public
     ----------------------------------------
  */
-@mixin include-offset-classes(){
+ @mixin add-offset-classes(){
     @each $label, $map in $breakpoints{
         @if $label == smartphone {
             @for $i from 1 to $grid-column-count + 1{
@@ -454,4 +448,4 @@
             }
         }
     }
-}
+ }

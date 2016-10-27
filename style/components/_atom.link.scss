@@ -1,0 +1,142 @@
+//------------------------------------------------------------------------------
+//  This file contains all styles related to the link component
+//------------------------------------------------------------------------------
+
+/*
+    Overrides anchor default style
+ */
+a{
+    @include transition($global-animation);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    font-weight: inherit;
+}
+
+
+
+
+
+/*
+    Creates a link element
+    @extend 'a' element
+ */
+@include bevm-block(link){
+    @extend a;
+    @include transition(color $global-animation-duration $global-animation-timing);
+    color: $color-text;
+
+    &:hover{
+        color: $color-text-light;
+    }
+
+    @include bevm-modifier(color-reversed){
+        color: $color-text-light;
+        &:hover{ color: $color-text; }
+    }
+    @include bevm-modifier(color-white){
+        color: $color-text-white;
+        &:hover{ color: $color-text-white-light; }
+    }
+    @include bevm-modifier(color-white-reversed){
+        color: $color-text-white-light;
+        &:hover{ color: $color-text-white; }
+    }
+    @include bevm-modifier(color-primary){
+        color: $color-brand-primary;
+        &:hover{ color: inherit; }
+    }
+}
+
+
+
+
+
+/*
+    Creates a variation of link element
+    Defines styles for underlined links
+    @extend 'a' element
+ */
+@include bevm-block(link--underlined){
+    @extend a;
+    @include transition(color $global-animation-duration $global-animation-timing);
+    @include transition(border-color $global-animation-duration $global-animation-timing);
+    color: $color-text;
+    border-bottom: 2px solid $color-text;
+
+    &:hover{
+        color: $color-text-light;
+        border-bottom-color: $color-text-light;
+    }
+
+    @include bevm-modifier(color-reversed){
+        color: $color-text-light;
+        border-bottom-color: $color-text-light;
+        &:hover{ color: $color-text; border-bottom-color: $color-text; }
+    }
+    @include bevm-modifier(color-white){
+        color: $color-text-white;
+        border-bottom-color: $color-text-white;
+        &:hover{ color: $color-text-white-light; border-bottom-color: $color-text-white-light; }
+    }
+    @include bevm-modifier(color-white-reversed){
+        color: $color-text-white-light;
+        border-bottom-color: $color-text-white-light;
+        &:hover{ color: $color-text-white; border-bottom-color: $color-text-white; }
+    }
+    @include bevm-modifier(color-primary){
+        color: $color-brand-primary;
+        border-bottom-color: $color-brand-primary;
+        &:hover{ color: inherit; border-bottom-color: inherit; }
+    }
+}
+
+
+
+
+
+/*
+    Creates a variation of link element
+    Defines styles for awesome links
+    @extend a
+ */
+@include bevm-block(link--awesome){
+    @extend a;
+    @include transition(color $global-animation-duration $global-animation-timing);
+    display: inline-block;
+    position: relative;
+    color: $color-text;
+
+    &:before{
+        @include transition(width $global-animation-duration $global-animation-timing);
+        content: '';
+        display: block;
+        width: 0;
+        height: 2px;
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        right: 0;
+        background-color: $color-text;
+    }
+
+    &:hover:before{
+        width: 100%;
+    }
+
+    @include bevm-modifier(color-white){
+        color: $color-text-white;
+
+        &:before{ background-color:$color-text-white; }
+    }
+
+    @include bevm-modifier(color-primary){
+        color: inherit;
+
+        &:before{ background-color:$color-brand-primary; }
+
+        &:hover{
+            color: $color-brand-primary;
+        }
+    }
+}

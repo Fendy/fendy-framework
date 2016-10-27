@@ -1,13 +1,7 @@
-/**
- *    TYPOGRAPHY MIXINS
- *
- *    create-weight-variables()...Creates varibales for font weights defined in $font-weights
- *
- */
-
-
-
-
+//------------------------------------------------------------------------------
+//  This file contains useful typography mixins
+//------------------------------------------------------------------------------
+//  add-weight-variables()...Creates varibales for font weights
 
 /*
      Creates variables for font weights defined in $font-weights. If no value is provided the font-weight variables is skipped

@@ -1,0 +1,51 @@
+//------------------------------------------------------------------------------
+//  This file contains all styles related to off-canvas navigation layout
+//------------------------------------------------------------------------------
+
+/*
+    These create off canvas navigation elements and styles
+ */
+@include bevm-block(off-canvas){
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    @include bevm-element(nav){
+        @include transition(transform $global-animation-duration $global-animation-timing);
+
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        @include transform(translateX(-100%));
+
+        @include add-off-canvas-nav-widths();
+
+        @include state-class(open){
+            @include transform(translateX(0));
+        }
+    }
+
+    @include bevm-element(main){
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    @media screen and (min-width: $off-canvas-static-breakpoint){
+        @include flex();
+        @include flex-wrap(nowrap);
+        @include justify-content($flexbox-justify-content-default);
+        @include align-items($flexbox-align-items-default);
+        @include align-content($flexbox-align-content-default);
+        @include flex-direction(row);
+
+        @include bevm-element(nav){
+            position: relative;
+            transform: translate(0, 0);
+        }
+
+        @include bevm-element(main){
+            @include flex-grow(1);
+        }
+    }
+}

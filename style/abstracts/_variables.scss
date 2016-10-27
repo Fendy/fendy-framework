@@ -1,12 +1,12 @@
-/**
- *    GLOBAL VARIABLES
- *    Generic.....................Commonly used values
- *    Color.......................Color palette
- *    Typography..................Values for typography
- *    Breakpoints.................Breakpoints variables
- *    Grid........................Grid related values
- *    Lists.......................Values for lists
- */
+//------------------------------------------------------------------------------
+//  This file contains variables used globally
+//------------------------------------------------------------------------------
+//  Generic............................Commonly used values
+//  Color..............................Color palette
+//  Typography.........................Values for typography
+//  Breakpoints........................Breakpoints variables
+//  Grid...............................Grid related values
+//  Lists..............................Values for lists
 
 /*********************************\
     #GENERIC
@@ -15,7 +15,7 @@
 $global-margin: 0;
 $global-padding: 0;
 $global-font-size: 16px;
-$global-line-height: 1.5;
+$global-line-height: 24px;
 $global-font-weight: normal;
 $global-letter-spacing: normal;
 $global-animation-property: all;
@@ -23,7 +23,7 @@ $global-animation-duration: 0.2s;
 $global-animation-timing: ease-in;
 $global-animation-delay: 0s;
 $global-animation: $global-animation-property $global-animation-duration $global-animation-timing $global-animation-delay;
-
+$global-btn-padding: 10px 15px;
 
 
 
@@ -37,7 +37,7 @@ $global-animation: $global-animation-property $global-animation-duration $global
 \*********************************/
 
 /* [1] */
-$color-text: rgba(0, 0, 0, 0.87);
+$color-text: rgba(0, 0, 0, 0.87); //rgb(65,66,69)
 $color-text-light: rgba(0, 0, 0, 0.54);
 $color-text-lightest: rgba(0, 0, 0, 0.38);
 
@@ -45,21 +45,20 @@ $color-text-white: rgba(255, 255, 255, 1);
 $color-text-white-light: rgba(255, 255, 255, 0.7);
 $color-text-white-lightest: rgba(255, 255, 255, 0.5);
 
-$color-background-white: #ffffff;
-$color-background-black: #000000;
-$color-background-grey: #F2F4F8;
-
 /* [2] */
 $color-brand-primary: #0069FF;
 $color-brand-secondary: #4FD696;
-$color-brand-grey: #cccccc;
-$color-brand-grey-light: #eeeeee;
-$color-brand-grey-lightest: #f4f7f9;
+$color-brand-bkg: #F2F4F8;
 
 /* [3] */
+$color-ui-black: #000000;
+$color-ui-white: #ffffff;
 $color-ui-success: #79BC32;
 $color-ui-error: #ee4f4f;
 $color-ui-warning: #FFC12D;
+
+$color-ui-grey-light: #eeeeee;
+$color-ui-grey-lightest: #f4f7f9;
 
 $color-ui-overlay-light: rgba(0, 0, 0, 0.36);
 $color-ui-overlay-dark: rgba(0, 0, 0, 0.85);
@@ -95,11 +94,6 @@ $color-social-behance: #1769ff;
     #TYPOGRAPHY
 \*********************************/
 
-@import 'https://fonts.googleapis.com/css?family=Hind+Guntur:300,400,500,600,700|Open+Sans:300,400,500,600,700';
-
-$font-family-primary: 'Hind Guntur';
-$font-family-secondary: 'Open Sans';
-
 $font-weights: (
     thin: 100,      extralight: 200,
     light: 300,     regular: 400,
@@ -107,7 +101,7 @@ $font-weights: (
     bold: 700,      extrabold: 800,
     heavy: 900
 );
-@include add-weight-variables();
+//@include add-weight-variables();
 
 $heroheader-sizes: (
     hero1: 4.5em,   //72px
@@ -119,7 +113,7 @@ $header-sizes: (
     h2: 2.5em,      //40px
     h3: 1.938em,    //31px
     h4: 1.563em,    //25px
-    h5: 1.25,       //20px
+    h5: 1.25em,       //20px
     h6: 1em         //16px
 );
 $subheader-sizes: (

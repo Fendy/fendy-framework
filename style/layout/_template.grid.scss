@@ -1,27 +1,24 @@
-/**
- *    GRID
- *
- *    Layout......................Creates grid layout
- *    Off-canvas..................Structure for off-canvas navigation
- *    Offset......................Classes for offsets
+//------------------------------------------------------------------------------
+//  This file contains all styles related to the grid layout
+//------------------------------------------------------------------------------
+
+/*
+    This creates our flexbox based grid system
  */
+@include add-grid();
 
 
 
 
 
- /*********************************\
-     #LAYOUT
- \*********************************/
-
-@include include-grid();
-
+/*
+    Give flex containers all their flexbox super powers
+ */
 .flex,
 .flex--column,
 .flex--ng,
 .flex--col-ng{
     width: 100%;
-    height: auto;
     margin: auto;
     @include flex();
     @include flex-wrap($flexbox-wrap-default);
@@ -61,6 +58,13 @@
     @include bevm-modifier(align-content-around){ @include align-content(space-around);}
 }
 
+
+
+
+
+/*
+    Give all flex items their flexbox super powers
+ */
 .flex__item,
 .flex--column__item,
 .flex--ng__item,
@@ -72,66 +76,11 @@
     @include align-self(auto);
 }
 
-@include include-container-breakpoints();
 
 
 
 
-
-/*********************************\
-    #OFF-CANVAS
-\*********************************/
-
-@include bevm-block(off-canvas){
-    width: 100%;
-    height: 100%;
-    position: relative;
-
-    @include bevm-element(nav){
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        transform: translate(-100%, 0);
-        transition: $global-animation;
-
-        @include include-off-canvas-nav-widths();
-
-        @include state-class(open){
-            transform: translate(0, 0);
-        }
-    }
-
-    @include bevm-element(main){
-        width: 100%;
-        height: 100%;
-        position: relative;
-    }
-
-    @media screen and (min-width: $off-canvas-static-breakpoint){
-        @include flex();
-        @include flex-wrap(nowrap);
-        @include justify-content($flexbox-justify-content-default);
-        @include align-items($flexbox-align-items-default);
-        @include align-content($flexbox-align-content-default);
-        @include flex-direction(row);
-
-        @include bevm-element(nav){
-            position: relative;
-            transform: translate(0, 0);
-        }
-
-        @include bevm-element(main){
-            @include flex-grow(1);
-        }
-    }
-}
-
-
-
-
-
-/*********************************\
-    #OFF-CANVAS
-\*********************************/
-
-@include include-offset-classes();
+/*
+    Define width breakpoints for flex container
+ */
+@include add-container-breakpoints();
