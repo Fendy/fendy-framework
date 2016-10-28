@@ -21,7 +21,7 @@ a{
     Creates a link element
     @extend 'a' element
  */
-.link{
+a.link{
     @extend a;
     @include transition(color $global-animation-duration $global-animation-timing);
     color: $color-text;
@@ -57,7 +57,7 @@ a{
     Defines styles for underlined links
     @extend 'a' element
  */
-.link--underlined{
+a.link--underlined{
     @extend a;
     @include transition(color $global-animation-duration $global-animation-timing);
     display: inline-block;
@@ -125,7 +125,7 @@ a{
     Defines styles for awesome links
     @extend a
  */
-.link--awesome{
+a.link--awesome{
     @extend a;
     @include transition(color $global-animation-duration $global-animation-timing);
     display: inline-block;
