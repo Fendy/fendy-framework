@@ -391,12 +391,12 @@
         @if map-has-key($grid-container-max-widths, $label){
             @if map-has-key($map, min){
                 @media screen and (min-width: map-get($map, min)){
-                    .flex-container{
+                    .flex{
                         max-width: map-get($grid-container-max-widths, $label);
                     }
                 }
             } @else{
-                .flex-container{
+                .flex{
                     max-width: map-get($grid-container-max-widths, $label);
                 }
             }
