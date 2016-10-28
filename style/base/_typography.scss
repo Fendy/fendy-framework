@@ -21,7 +21,8 @@ h5, h6{
     font-weight: bold;
     color: inherit;
     line-height: $line-height-header;
-    margin-bottom: 0.5em;
+    margin: 0;
+    margin-bottom: 1em;
     font-size: 1.875em;
 }
 
@@ -56,7 +57,24 @@ h5, h6{
     }
 
     @include bevm-element(subheader){
-        font-size: 85%;
+        font-size: 55%;
+        color: $color-text-lightest;
+        font-weight: $font-weight-regular;
+    }
+}
+
+
+
+
+
+/**
+ *    Assign hierarchical font sizes to each "hero" header with
+ *    block class header--hero
+ */
+
+@each $header, $size in $heroheader-sizes{
+    #{$header}.header--hero{
+        font-size: $size;
     }
 }
 
