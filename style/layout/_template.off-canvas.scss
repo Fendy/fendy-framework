@@ -5,12 +5,12 @@
 /*
     These create off canvas navigation elements and styles
  */
-@include bevm-block(off-canvas){
+.off-canvas{
     width: 100%;
     height: 100%;
     position: relative;
 
-    @include bevm-element(nav){
+    & > .off-canvas__nav{
         @include transition(transform $global-animation-duration $global-animation-timing);
 
         width: 100%;
@@ -20,12 +20,12 @@
 
         @include add-off-canvas-nav-widths();
 
-        @include state-class(open){
+        .is-open{
             @include transform(translateX(0));
         }
     }
 
-    @include bevm-element(main){
+    & > .off-canvas__main{
         width: 100%;
         height: 100%;
         position: relative;
@@ -39,12 +39,12 @@
         @include align-content($flexbox-align-content-default);
         @include flex-direction(row);
 
-        @include bevm-element(nav){
+        & > .off-canvas__nav{
             position: relative;
             transform: translate(0, 0);
         }
 
-        @include bevm-element(main){
+        & > .off-canvas__main{
             @include flex-grow(1);
         }
     }

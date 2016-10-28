@@ -27,35 +27,35 @@
     @include align-content($flexbox-align-content-default);
 
 
-    @include bevm-modifier(nowrap){ @include flex-wrap(nowrap);}
+    &.-nowrap{ @include flex-wrap(nowrap);}
 
-    @include bevm-modifier(wrap-reverse){ @include flex-wrap(wrap-reverse);}
+    &.-wrap-reverse{ @include flex-wrap(wrap-reverse);}
 
-    @include bevm-modifier(justify-end){ @include justify-content(flex-end);}
+    &.-justify-end{ @include justify-content(flex-end);}
 
-    @include bevm-modifier(justify-center){ @include justify-content(center);}
+    &.-justify-center{ @include justify-content(center);}
 
-    @include bevm-modifier(justify-between){ @include justify-content(space-between);}
+    &.-justify-between{ @include justify-content(space-between);}
 
-    @include bevm-modifier(justify-around){ @include justify-content(space-around);}
+    &.-justify-around{ @include justify-content(space-around);}
 
-    @include bevm-modifier(align-items-start){ @include align-items(flex-start);}
+    &.-align-items-start{ @include align-items(flex-start);}
 
-    @include bevm-modifier(align-items-end){ @include align-items(flex-end);}
+    &.-align-items-end{ @include align-items(flex-end);}
 
-    @include bevm-modifier(align-items-center){ @include align-items(center);}
+    &.-align-items-center{ @include align-items(center);}
 
-    @include bevm-modifier(align-items-baseline){ @include align-items(baseline);}
+    &.-align-items-baseline{ @include align-items(baseline);}
 
-    @include bevm-modifier(align-content-start){ @include align-content(flex-start);}
+    &.-align-content-start{ @include align-content(flex-start);}
 
-    @include bevm-modifier(align-content-end){ @include align-content(flex-end);}
+    &.-align-content-end{ @include align-content(flex-end);}
 
-    @include bevm-modifier(align-content-center){ @include align-content(center);}
+    &.-align-content-center{ @include align-content(center);}
 
-    @include bevm-modifier(align-content-between){ @include align-content(space-between);}
+    &.-align-content-between{ @include align-content(space-between);}
 
-    @include bevm-modifier(align-content-around){ @include align-content(space-around);}
+    &.-align-content-around{ @include align-content(space-around);}
 }
 
 

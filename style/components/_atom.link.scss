@@ -21,7 +21,7 @@ a{
     Creates a link element
     @extend 'a' element
  */
-@include bevm-block(link){
+.link{
     @extend a;
     @include transition(color $global-animation-duration $global-animation-timing);
     color: $color-text;
@@ -30,19 +30,19 @@ a{
         color: $color-text-light;
     }
 
-    @include bevm-modifier(color-reversed){
+    &.-color-reversed{
         color: $color-text-light;
         &:hover{ color: $color-text; }
     }
-    @include bevm-modifier(color-white){
+    &.-color-white{
         color: $color-text-white;
         &:hover{ color: $color-text-white-light; }
     }
-    @include bevm-modifier(color-white-reversed){
+    &.-color-white-reversed{
         color: $color-text-white-light;
         &:hover{ color: $color-text-white; }
     }
-    @include bevm-modifier(color-primary){
+    &.-color-primary{
         color: $color-brand-primary;
         &:hover{ color: inherit; }
     }
@@ -57,7 +57,7 @@ a{
     Defines styles for underlined links
     @extend 'a' element
  */
-@include bevm-block(link--underlined){
+.link--underlined{
     @extend a;
     @include transition(color $global-animation-duration $global-animation-timing);
     display: inline-block;
@@ -85,7 +85,7 @@ a{
         }
     }
 
-    @include bevm-modifier(color-reversed){
+    &.-color-reversed{
         color: $color-text-light;
         &:before{ background-color: $color-text-light; }
         &:hover{
@@ -93,21 +93,21 @@ a{
             &:before{ background-color: $color-text; }
         }
     }
-    @include bevm-modifier(color-white){
+    &.-color-white{
         color: $color-text-white;
         &:before{ background-color: $color-text-white; }
         &:hover{ color: $color-text-white-light;
             &:before{ background-color: $color-text-white-light; }
         }
     }
-    @include bevm-modifier(color-white-reversed){
+    &.-color-white-reversed{
         color: $color-text-white-light;
         &:before{ background-color: $color-text-white-light; }
         &:hover{ color: $color-text-white;
             &:before{ background-color: $color-text-white; }
         }
     }
-    @include bevm-modifier(color-primary){
+    &.-color-primary{
         color: $color-brand-primary;
         &:before{ background-color: $color-brand-primary; }
         &:hover{ color: inherit;
@@ -125,7 +125,7 @@ a{
     Defines styles for awesome links
     @extend a
  */
-@include bevm-block(link--awesome){
+.link--awesome{
     @extend a;
     @include transition(color $global-animation-duration $global-animation-timing);
     display: inline-block;
@@ -149,13 +149,13 @@ a{
         width: 100%;
     }
 
-    @include bevm-modifier(color-white){
+    &.-color-white{
         color: $color-text-white;
 
         &:before{ background-color:$color-text-white; }
     }
 
-    @include bevm-modifier(color-primary){
+    &.-color-primary{
         color: inherit;
 
         &:before{ background-color:$color-brand-primary; }

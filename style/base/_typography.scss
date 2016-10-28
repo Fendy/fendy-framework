@@ -48,15 +48,15 @@ h5, h6{
  *    subheader child element
  */
 
-@include bevm-block(header){
+.header{
 
     @each $header, $size in $header-sizes{
-        @include bevm-modifier(#{$header}){
+        &.-#{$header}{
             font-size: $size;
         }
     }
 
-    @include bevm-element(subheader){
+    & > .header__subheader{
         font-size: 55%;
         color: $color-text-lightest;
         font-weight: $font-weight-regular;
@@ -93,11 +93,9 @@ p{
     margin-bottom: 1em;
 }
 
-@include bevm-block(paragraph){
-    @include bevm-variation(lead){
-        font-size: 112.5%;
-        line-height: 28px;
-    }
+.paragraph--lead{
+    font-size: 112.5%;
+    line-height: 28px;
 }
 
 small, .caption{

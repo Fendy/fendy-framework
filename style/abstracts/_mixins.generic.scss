@@ -4,15 +4,7 @@
 //  prefix()...............Handle vendor prefixes (Sass 3.2 fallback)
 //  prefix()...............Handle vendor prefixes (Sass 3.3)
 //  box-sizing()...........Prefix box-sizing property
-//  bevm-block()...........Block handler for BEVM convention
-//  bevm-element().........Element handler for BEVM convention
-//  bevm-variation().......Variation handler for BEVM convention
-//  bevm-modifier()........Modifier handler for BEVM convention
-//  state-class()..........State handler (See Chainable BEM modifiers)
-//  h-class().........Helper handler (See Chainable BEM modifiers)
-//
-//  More on bevm: http://es.slideshare.net/Jyaasa/bevm--blockelementvariation-modifier
-//  More on Chainable BEM modifiers: http://webuild.envato.com/blog/chainable-bem-modifiers/
+
 
 /*
      Hande CSS vendor prefixes
@@ -69,112 +61,4 @@
 */
 @mixin box-sizing($val) {
    @include prefix((box-sizing: $val));
-}
-
-
-
-
-
-/*
-   Block handler for BEVM convention
-   -----------------------------------
-   @access public
-   -----------------------------------
-   @param {string} $name - name of the block
-   @content - statements to include inside declaration
-*/
-@mixin bevm-block($name) {
-   .#{$name} {
-       @content;
-   }
-}
-
-
-
-
-
-/*
-   Element handler for BEVM convention
-   -----------------------------------
-   @access public
-   -----------------------------------
-   @param {string} $name - name of the element
-   @content - statements to include inside declaration
-*/
-@mixin bevm-element($name) {
-   &__#{$name} {
-       @content;
-   }
-}
-
-
-
-
-
-/*
-   Variation handler for BEVM convention
-   ----------------------------------------
-   @access public
-   ----------------------------------------
-   @param {string} $name - name of the variation
-   @content - statements to include inside declaration
-*/
-@mixin bevm-variation($name) {
-   &--#{$name} {
-       @content;
-   }
-}
-
-
-
-
-
-/*
-   Modifier handler for BEVM convention
-   ----------------------------------------
-   @access public
-   ----------------------------------------
-   @param {string} $name - name of the modifier
-   @content - statements to include inside declaration
-*/
-@mixin bevm-modifier($name) {
-   &.-#{$name} {
-       @content;
-   }
-}
-
-
-
-
-
-/*
-   State handler
-   ----------------------------------------
-   @access public
-   ----------------------------------------
-   @param {string} $name - name of the state
-   @content - statements to include inside declaration
-*/
-@mixin state-class($name) {
-   &.is-#{$name} {
-       @content;
-   }
-}
-
-
-
-
-
-/*
-   Helper handler
-   ----------------------------------------
-   @access public
-   ----------------------------------------
-   @param {string} $name - name of the helper
-   @content - statements to include inside declaration
-*/
-@mixin h-class($name) {
-   &.h-#{$name} {
-       @content;
-   }
 }

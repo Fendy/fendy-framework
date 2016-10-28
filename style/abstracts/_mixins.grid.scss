@@ -232,12 +232,12 @@
  */
  @mixin _flex-row-item($map, $i, $hasGutter){
     @if $hasGutter{
-        @include bevm-modifier(map-get($map, abbr)#{$i}){
+        &.-#{map-get($map, abbr)}#{$i}{
             width: calc( ((100% / #{$grid-column-count}) * #{$i}) - #{$grid-column-gutter} );
             margin: calc(#{$grid-column-gutter}/2);
         }
     }@else{
-        @include bevm-modifier(map-get($map, abbr)#{$i}){
+        &.-#{map-get($map, abbr)}#{$i}{
             width: calc( ((100% / #{$grid-column-count}) * #{$i}));
             margin: initial;
         }
@@ -259,12 +259,12 @@
  */
  @mixin _flex-column-item($map, $i, $hasGutter){
     @if $hasGutter{
-        @include bevm-modifier(map-get($map, abbr)#{$i}){
+        &.-#{map-get($map, abbr)}#{$i}{
             height: calc( ((100% / #{$grid-column-count}) * #{$i}) - #{$grid-column-gutter} );
             margin: calc(#{$grid-column-gutter}/2);
         }
     }@else{
-        @include bevm-modifier(map-get($map, abbr)#{$i}){
+        &.-#{map-get($map, abbr)}#{$i}{
             height: calc( ((100% / #{$grid-column-count}) * #{$i}) );
             margin: initial;
         }
@@ -291,11 +291,11 @@
  */
  @mixin add-grid(){
 
-    @include bevm-block(flex){  /* [1] */
+    .flex{  /* [1] */
         @include flex-direction(row);
-        @include bevm-modifier(reverse){ @include flex-direction(row-reverse);}
+        &.reverse{ @include flex-direction(row-reverse);}
 
-        @include bevm-element(item){    /* [2] */
+        & > .flex__item{    /* [2] */
 
             @each $label, $map in $breakpoints{     /* [3] */
                 @if $label == smartphone {      /* [4] */
@@ -311,63 +311,63 @@
                 }
             }
         }
+    }
 
-        @include bevm-variation(column){        /* [6] */
-            @include flex-direction(column);
-            @include bevm-modifier(reverse){ @include flex-direction(column-reverse);}
+    .fex--column{        /* [6] */
+        @include flex-direction(column);
+        &.reverse{ @include flex-direction(column-reverse);}
 
-            @include bevm-element(item){        /* [2] */
+        & > .flex__item{        /* [2] */
 
-                @each $label, $map in $breakpoints{     /* [3] */
-                    @if $label == smartphone {      /* [4] */
+            @each $label, $map in $breakpoints{     /* [3] */
+                @if $label == smartphone {      /* [4] */
+                    @for $i from 1 to $grid-column-count + 1{
+                        @include _flex-column-item($map, $i, true);
+                    }
+                }@else{     /* [5] */
+                    @media screen and (min-width: map-get($map, min)){
                         @for $i from 1 to $grid-column-count + 1{
                             @include _flex-column-item($map, $i, true);
                         }
-                    }@else{     /* [5] */
-                        @media screen and (min-width: map-get($map, min)){
-                            @for $i from 1 to $grid-column-count + 1{
-                                @include _flex-column-item($map, $i, true);
-                            }
-                        }
                     }
                 }
             }
         }
+    }
 
-        @include bevm-variation(ng){       /* [7] */
-            @include bevm-element(item){        /* [2] */
+    .flex--ng{       /* [7] */
+        & > .flex__item{        /* [2] */
 
-                @each $label, $map in $breakpoints{     /* [3] */
-                    @if $label == smartphone {      /* [4] */
+            @each $label, $map in $breakpoints{     /* [3] */
+                @if $label == smartphone {      /* [4] */
+                    @for $i from 1 to $grid-column-count + 1{
+                        @include _flex-row-item($map, $i, false);
+                    }
+                }@else{     /* [5] */
+                    @media screen and (min-width: map-get($map, min)){
                         @for $i from 1 to $grid-column-count + 1{
                             @include _flex-row-item($map, $i, false);
                         }
-                    }@else{     /* [5] */
-                        @media screen and (min-width: map-get($map, min)){
-                            @for $i from 1 to $grid-column-count + 1{
-                                @include _flex-row-item($map, $i, false);
-                            }
-                        }
                     }
                 }
             }
         }
+    }
 
-        @include bevm-variation(col-ng){        /* [8]] */
-            @include bevm-modifier(reverse){ @include flex-direction(column-reverse);}
+    .flex--col-ng{        /* [8]] */
+        &.reverse{ @include flex-direction(column-reverse);}
 
-            @include bevm-element(item){        /* [2] */
+        & > .flex__item{        /* [2] */
 
-                @each $label, $map in $breakpoints{     /* [3] */
-                    @if $label == smartphone {      /* [4] */
+            @each $label, $map in $breakpoints{     /* [3] */
+                @if $label == smartphone {      /* [4] */
+                    @for $i from 1 to $grid-column-count + 1{
+                        @include _flex-column-item($map, $i, false);
+                    }
+                }@else{     /* [5] */
+                    @media screen and (min-width: map-get($map, min)){
                         @for $i from 1 to $grid-column-count + 1{
                             @include _flex-column-item($map, $i, false);
-                        }
-                    }@else{     /* [5] */
-                        @media screen and (min-width: map-get($map, min)){
-                            @for $i from 1 to $grid-column-count + 1{
-                                @include _flex-column-item($map, $i, false);
-                            }
                         }
                     }
                 }
