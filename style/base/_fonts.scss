@@ -23,3 +23,8 @@ $font-family-primary: $system-font-stack;
  *    @type String | List
  */
 $font-family-secondary: $system-font-stack;
+
+/**
+ *    Creates font weight variables from predefined variable
+ */
+@include add-weight-variables();

@@ -101,12 +101,11 @@ $font-weights: (
     bold: 700,      extrabold: 800,
     heavy: 900
 );
-//@include add-weight-variables();
 
 $heroheader-sizes: (
-    hero1: 4.5em,   //72px
-    hero2: 4.125em,    //66px
-    hero3: 3.75em     //60px
+    h1: 4.5em,   //72px
+    h2: 4.125em,    //66px
+    h3: 3.75em     //60px
 );
 $header-sizes: (
     h1: 3em,        //48px
@@ -168,7 +167,7 @@ $breakpoint-8k-min: map-get( map-get($breakpoints, 8k), min);
     #GRID
 \*********************************/
 $grid-column-count: 12;
-$grid-column-gutter: 15px;
+$grid-column-gutter: 1.5em;
 $grid-container-max-widths: (
     smartphone: 100%,
     tablet: 950px,
