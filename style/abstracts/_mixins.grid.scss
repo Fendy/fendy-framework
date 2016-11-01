@@ -22,7 +22,6 @@
 //  _flex-column-item()...........Includes height and margin of row column flex-item
 //  add-grid()....................Define layout classes using breakpoints and grid columns
 //  add-container-breakpoints()...Define width breakpoints for flex container
-//  add-off-canvas-nav-widths()...Sets width breakpoints for off-canvas navigation
 //  add-offset-classes()..........Creates classes for offset for every breakpoint
 
 /***************************\
@@ -226,18 +225,18 @@
     ----------------------------------------
     @access private
     ----------------------------------------
-    @param {map} $map - parameters of breakpoints
+    @param {string} $label - name for gid breakpoint class
     @param {int} $i - counter of columns
     @param {boolean} $hasGutter - wether gutter should be included or not
  */
- @mixin _flex-row-item($map, $i, $hasGutter){
+ @mixin _flex-row-item($label, $i, $hasGutter){
     @if $hasGutter{
-        &.-#{map-get($map, abbr)}#{$i}{
+        &.-#{$label}#{$i}{
             width: calc( ((100% / #{$grid-column-count}) * #{$i}) - #{$grid-column-gutter} );
             margin: calc(#{$grid-column-gutter}/2);
         }
     }@else{
-        &.-#{map-get($map, abbr)}#{$i}{
+        &.-#{$label}#{$i}{
             width: calc( ((100% / #{$grid-column-count}) * #{$i}));
             margin: initial;
         }
@@ -253,18 +252,18 @@
     ----------------------------------------
     @access private
     ----------------------------------------
-    @param {map} $map - parameters of breakpoints
+    @param {string} $label - name for gid breakpoint class
     @param {int} $i - counter of columns
     @param {boolean} $hasGutter - wether gutter should be included or not
  */
- @mixin _flex-column-item($map, $i, $hasGutter){
+ @mixin _flex-column-item($label, $i, $hasGutter){
     @if $hasGutter{
-        &.-#{map-get($map, abbr)}#{$i}{
+        &.-#{$label}#{$i}{
             height: calc( ((100% / #{$grid-column-count}) * #{$i}) - #{$grid-column-gutter} );
             margin: calc(#{$grid-column-gutter}/2);
         }
     }@else{
-        &.-#{map-get($map, abbr)}#{$i}{
+        &.-#{$label}#{$i}{
             height: calc( ((100% / #{$grid-column-count}) * #{$i}) );
             margin: initial;
         }
@@ -297,15 +296,15 @@
 
         & > .flex__item{    /* [2] */
 
-            @each $label, $map in $breakpoints{     /* [3] */
-                @if $label == smartphone {      /* [4] */
+            @each $label, $breakpoint in $grid-breakpoints{     /* [3] */
+                @if $breakpoint == '' {      /* [4] */
                     @for $i from 1 to $grid-column-count + 1{
-                        @include _flex-row-item($map, $i, true);
+                        @include _flex-row-item($label, $i, true);
                     }
                 }@else{     /* [5] */
-                    @media screen and (min-width: map-get($map, min)){
+                    @include respond-to($breakpoint){
                         @for $i from 1 to $grid-column-count + 1{
-                            @include _flex-row-item($map, $i, true);
+                            @include _flex-row-item($label, $i, true);
                         }
                     }
                 }
@@ -319,15 +318,15 @@
 
         & > .flex__item{        /* [2] */
 
-            @each $label, $map in $breakpoints{     /* [3] */
-                @if $label == smartphone {      /* [4] */
+            @each $label, $breakpoint in $grid-breakpoints{     /* [3] */
+                @if $breakpoint == '' {      /* [4] */
                     @for $i from 1 to $grid-column-count + 1{
-                        @include _flex-column-item($map, $i, true);
+                        @include _flex-column-item($label, $i, true);
                     }
                 }@else{     /* [5] */
-                    @media screen and (min-width: map-get($map, min)){
+                    @include respond-to($breakpoint){
                         @for $i from 1 to $grid-column-count + 1{
-                            @include _flex-column-item($map, $i, true);
+                            @include _flex-column-item($label, $i, true);
                         }
                     }
                 }
@@ -338,15 +337,15 @@
     .flex--ng{       /* [7] */
         & > .flex__item{        /* [2] */
 
-            @each $label, $map in $breakpoints{     /* [3] */
-                @if $label == smartphone {      /* [4] */
+            @each $label, $breakpoint in $grid-breakpoints{     /* [3] */
+                @if $breakpoint == '' {      /* [4] */
                     @for $i from 1 to $grid-column-count + 1{
-                        @include _flex-row-item($map, $i, false);
+                        @include _flex-row-item($label, $i, false);
                     }
                 }@else{     /* [5] */
-                    @media screen and (min-width: map-get($map, min)){
+                    @include respond-to($breakpoint){
                         @for $i from 1 to $grid-column-count + 1{
-                            @include _flex-row-item($map, $i, false);
+                            @include _flex-row-item($label, $i, false);
                         }
                     }
                 }
@@ -359,15 +358,15 @@
 
         & > .flex__item{        /* [2] */
 
-            @each $label, $map in $breakpoints{     /* [3] */
-                @if $label == smartphone {      /* [4] */
+            @each $label, $breakpoint in $grid-breakpoints{     /* [3] */
+                @if $breakpoint == '' {      /* [4] */
                     @for $i from 1 to $grid-column-count + 1{
-                        @include _flex-column-item($map, $i, false);
+                        @include _flex-column-item($label, $i, false);
                     }
                 }@else{     /* [5] */
-                    @media screen and (min-width: map-get($map, min)){
+                    @include respond-to($breakpoint){
                         @for $i from 1 to $grid-column-count + 1{
-                            @include _flex-column-item($map, $i, false);
+                            @include _flex-column-item($label, $i, false);
                         }
                     }
                 }
@@ -387,37 +386,14 @@
     ----------------------------------------
  */
  @mixin add-container-breakpoints(){
-    @each $label, $map in $breakpoints{
-        @if map-has-key($grid-container-max-widths, $label){
-            @if map-has-key($map, min){
-                @media screen and (min-width: map-get($map, min)){
-                    .flex{
-                        max-width: map-get($grid-container-max-widths, $label);
-                    }
-                }
-            } @else{
-                .flex{
-                    max-width: map-get($grid-container-max-widths, $label);
-                }
+    @each $breakpoint, $width in $flex-container-max-widths{
+        @include respond-to($breakpoint){
+            .flex,
+            .flex--column,
+            .flex--ng,
+            .flex--col-ng{
+                max-width: $width;
             }
-        }
-    }
- }
-
-
-
-
-
- /*
-    Sets width breakpoints for off-canvas navigation
-    ----------------------------------------
-    @access public
-    ----------------------------------------
- */
- @mixin add-off-canvas-nav-widths(){
-    @each $label, $columns-width in $off-canvas-breakpoints{
-        @media screen and (min-width:  map-get(map-get($breakpoints, $label), min)){
-            width: calc( ((100% / #{$grid-column-count}) * #{$columns-width})) !important;
         }
     }
  }
@@ -431,17 +407,17 @@
     ----------------------------------------
  */
  @mixin add-offset-classes(){
-    @each $label, $map in $breakpoints{
-        @if $label == smartphone {
+    @each $label, $breakpoint in $grid-breakpoints{
+        @if $breakpoint == '' {
             @for $i from 1 to $grid-column-count + 1{
-                .offset-#{map-get($map, abbr)}#{$i}{
+                .offset-#{$label}#{$i}{
                     margin-left: calc( (100%/#{$grid-column-count}) * #{$i});
                 }
             }
         }@else{
-            @media screen and (min-width: map-get($map, min)){
+            @include respond-to($breakpoint){
                 @for $i from 1 to $grid-column-count + 1{
-                    .offset-#{map-get($map, abbr)}#{$i}{
+                    .offset-#{$label}#{$i}{
                         margin-left: calc( (100%/#{$grid-column-count}) * #{$i});
                     }
                 }

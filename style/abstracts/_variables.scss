@@ -136,28 +136,50 @@ $line-height-paragraph-lead: 2;
     #BREAKPOINTS
 \*********************************/
 
+/**
+ *    Defines common device breakpoints using a mobile-first approach
+ *    Each min-width is the previous category's max-width + 1px
+ *    @type Map
+ */
 $breakpoints: (
-    smartphone: ( abbr: s, max: 640px),
-    tablet:     ( abbr: t, min: 641px, max: 959px),
-    medium:     ( abbr: m, min: 960px, max: 1279px),
-    large:      ( abbr: l, min: 1280px, max: 1919px),
-    extralarge: ( abbr: xl, min: 1920px),
-    4k:         ( abbr: u4k, min: 3840px),
-    5k:         ( abbr: u5k, min: 5120px),
-    8k:         ( abbr: u8k, min: 7680px)
+    'mob-m': (min-width: 321px),    // Ex. iPhone 7
+    'mob-l': (min-width: 376px),    // Ex. iPhone 7 Plus
+    'tab': (min-width: 601px),      // Ex. iPad
+    'lap': (min-width: 769px),      // Ex. iPad landscape
+    'lap-m': (min-width: 1025px),   // Ex. 13' MacBook
+    'lap-l': (min-width: 1281px),   // Ex. 15' MacBook
+    'desk': (min-width: 1601px),  // Ex. 21.5' iMac
+    'desk-m': (min-width: 1921px),   // Ex. 27' iMac
+    '4k': (min-width: 2561px),      // Ex. 4K iMac
+    '5k': (min-width: 4097px)       // Ex. 5K iMac
 );
 
-$breakpoint-smartphone-max: map-get( map-get($breakpoints, smartphone), max);
-$breakpoint-tablet-min: map-get( map-get($breakpoints, tablet), min);
-$breakpoint-tablet-max: map-get( map-get($breakpoints, tablet), max);
-$breakpoint-medium-min: map-get( map-get($breakpoints, medium), min);
-$breakpoint-medium-max: map-get( map-get($breakpoints, medium), max);
-$breakpoint-large-min: map-get( map-get($breakpoints, large), min);
-$breakpoint-large-max: map-get( map-get($breakpoints, large), max);
-$breakpoint-extralarge-min: map-get( map-get($breakpoints, extralarge), min);;
-$breakpoint-4k-min: map-get( map-get($breakpoints, 4k), min);
-$breakpoint-5k-min: map-get( map-get($breakpoints, 5k), min);
-$breakpoint-8k-min: map-get( map-get($breakpoints, 8k), min);
+
+
+
+
+/**
+ *    Defines key breakpoints for grid system
+ *    Key will be used for flex item size modifier class
+ *    Values refer to breakpoints map
+ *    @type Map
+ */
+$grid-breakpoints: (
+    mob: '',  // Intentionally empty, this is default
+    tab: 'tab',
+    lap: 'lap'
+);
+
+
+
+
+
+/**
+ *    Base static breakpoint to use globally
+ *    Value refers to breakpoints map
+ *    @type String
+ */
+$base-static-breakpoint: 'lap';
 
 
 
@@ -168,26 +190,24 @@ $breakpoint-8k-min: map-get( map-get($breakpoints, 8k), min);
 \*********************************/
 $grid-column-count: 12;
 $grid-column-gutter: 1.5em;
-$grid-container-max-widths: (
-    smartphone: 100%,
-    tablet: 950px,
-    medium: 1247px,
-    large: 1871px,
-    4k: 4992px,
-    5k: 7488px,
-    8k: none
+
+/**
+ *    Defines the max width of flex container for given grid breakpoints
+ *    Should keep these breakpoints in sync with $grid-breakpoints
+ *    Key refers to breakpoint in $breakpoints
+ *    Value is calculated as 97% of category max-width
+ *    @type Map
+ */
+$flex-container-max-widths: (
+    'tab': 993.28px,
+    'lap': 1241.6px,
+    'desk': 1862.4px
 );
 
 $flexbox-wrap-default: wrap;
 $flexbox-justify-content-default: flex-start;
 $flexbox-align-items-default: stretch;
 $flexbox-align-content-default: stretch;
-
-$off-canvas-static-breakpoint: $breakpoint-tablet-min;
-$off-canvas-breakpoints: (
-    tablet: 4,
-    medium: 4
-);
 
 
 
@@ -200,4 +220,3 @@ $off-canvas-breakpoints: (
 $list-type-brand-1: '../brand/list-style-image-1.svg';
 $list-type-brand-2: '../brand/list-style-image-2.svg';
 $list-inline-gap: 5px;
-$list-inline-definition-breakpoint: $breakpoint-tablet-min;

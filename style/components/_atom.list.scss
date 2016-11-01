@@ -137,7 +137,7 @@ dl{
         Creates modifier to show inline list items when predefined breakpoint is reached.
      */
     &.list.-display-inline{
-        @media screen and (min-width: $list-inline-definition-breakpoint){
+        @include respond-to($base-static-breakpoint){
             width: 100%;
             height: auto;
             margin: auto;

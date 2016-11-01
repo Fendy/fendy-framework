@@ -4,6 +4,7 @@
 //  prefix()...............Handle vendor prefixes (Sass 3.2 fallback)
 //  prefix()...............Handle vendor prefixes (Sass 3.3)
 //  box-sizing()...........Prefix box-sizing property
+//  respond-to()...........Handle media queries
 
 
 /*
@@ -61,4 +62,25 @@
 */
 @mixin box-sizing($val) {
    @include prefix((box-sizing: $val));
+}
+
+
+
+
+
+/**
+ *    Handle media queries
+ *    -----------------------
+ *    @access public
+ *    -----------------------
+ *    @param {string} $name - name of the breakpoint to which respond to
+ */
+@mixin respond-to($name){
+    @if map-has-key($breakpoints, $name){
+        @media screen and #{inspect(map-get($breakpoints, $name))}{
+            @content;
+        }
+    }@else{
+        @warn "Unfortunately, no value could be retrieved for #{inspect($name)}. Please make sure it is defined in $breakpoints map.";
+    }
 }

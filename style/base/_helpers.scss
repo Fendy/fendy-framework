@@ -386,8 +386,8 @@
 /*
     Show element on tablet-size devices
  */
-.h-visible-tablet{
-    @media screen and (min-width: $breakpoint-tablet-min){ visibility: visible; }
+.h-visible-tab{
+    @include respond-to('tab'){ visibility: visible; }
 }
 
 
@@ -395,10 +395,10 @@
 
 
 /*
-    Show element on medium-size devices
+    Show element on laptop devices
  */
-.h-visible-medium{
-    @media screen and (min-width: $breakpoint-medium-min){ visibility: visible; }
+.h-visible-lap{
+    @include respond-to('lap'){ visibility: visible; }
 }
 
 
@@ -406,21 +406,10 @@
 
 
 /*
-    Show element on large-size devices
+    Show element on desktop devices
  */
-.h-visible-large{
-    @media screen and (min-width: $breakpoint-large-min){ visibility: visible; }
-}
-
-
-
-
-
-/*
-    Show element on extralarge-size devices
- */
-.h-visible-extralarge{
-    @media screen and (min-width: $breakpoint-extralarge-min){ visibility: visible;}
+.h-visible-desk{
+    @include respond-to('desk'){ visibility: visible;}
 }
 
 
@@ -439,8 +428,8 @@
 /*
     Make element invisible on tablet-size devices
  */
-.h-invisible-tablet{
-    @media screen and (min-width: $breakpoint-tablet-min){ visibility: hidden; }
+.h-invisible-tab{
+    @include respond-to('tab'){ visibility: hidden; }
 }
 
 
@@ -448,10 +437,10 @@
 
 
 /*
-    Make element invisible on medium-size devices
+    Make element invisible on laptop devices
  */
-.h-invisible-medium{
-    @media screen and (min-width: $breakpoint-medium-min){ visibility: hidden; }
+.h-invisible-lap{
+    @include respond-to('lap'){ visibility: hidden; }
 }
 
 
@@ -459,21 +448,10 @@
 
 
 /*
-    Make element invisible on large-size devices
+    Make element invisible on desktop devices
  */
-.h-invisible-large{
-    @media screen and (min-width: $breakpoint-large-min){ visibility: hidden; }
-}
-
-
-
-
-
-/*
-    Make element invisible on extralarge-size devices
- */
-.h-invisible-extralarge{
-    @media screen and (min-width: $breakpoint-extralarge-min){ visibility: hidden;}
+.h-invisible-desk{
+    @include respond-to('desk'){ visibility: hidden; }
 }
 
 
@@ -494,8 +472,8 @@
 /*
     Hide element on tablet-size devices
  */
-.h-hide-tablet{
-    @media screen and (min-width: $breakpoint-tablet-min){ display: none; }
+.h-hide-tab{
+    @include respond-to('tab'){ display: none; }
 }
 
 
@@ -503,10 +481,10 @@
 
 
 /*
-    Hide element on medium-size devices
+    Hide element on laptop devices
  */
-.h-hide-medium{
-    @media screen and (min-width: $breakpoint-medium-min){ display: none; }
+.h-hide-lap{
+    @include respond-to('lap'){ display: none; }
 }
 
 
@@ -514,19 +492,8 @@
 
 
 /*
-    Hide element on large-size devices
+    Hide element on desktop devices
  */
-.h-hide-large{
-    @media screen and (min-width: $breakpoint-large-min){ display: none; }
-}
-
-
-
-
-
-/*
-    Hide element on extralarge-size devices
- */
-.h-hide-extralarge{
-    @media screen and (min-width: $breakpoint-extralarge-min){ display: none; }
+.h-hide-desk{
+    @include respond-to('desk'){ display: none; }
 }

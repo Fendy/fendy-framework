@@ -18,8 +18,6 @@
         position: absolute;
         @include transform(translateX(-100%));
 
-        @include add-off-canvas-nav-widths();
-
         .is-open{
             @include transform(translateX(0));
         }
@@ -31,7 +29,7 @@
         position: relative;
     }
 
-    @media screen and (min-width: $off-canvas-static-breakpoint){
+    @include respond-to($base-static-breakpoint){
         @include flex();
         @include flex-wrap(nowrap);
         @include justify-content($flexbox-justify-content-default);
@@ -40,6 +38,7 @@
         @include flex-direction(row);
 
         & > .off-canvas__nav{
+            width: calc( 100%/12 * 4 );
             position: relative;
             transform: translate(0, 0);
         }
