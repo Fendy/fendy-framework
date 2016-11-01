@@ -86,3 +86,15 @@ body {
     margin: 0;
     padding: 0;
 }
+
+
+
+
+
+/**
+ *    Prevent overflowing content 
+ */
+ img, embed,
+ object, video{
+   max-width: 100%;
+ }
