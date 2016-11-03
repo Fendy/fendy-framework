@@ -275,6 +275,20 @@
 
 
 
+/*
+    Truncate multiline text with ellipsis
+    @require $block-truncate-lines variable
+ */
+.h-txt-truncate-multiline{
+    display: block;
+    display: -webkit-box;
+    height: calc($block-truncate-lines * $block-truncate-line-height + 1)px;
+    -webkit-line-clamp: $block-truncate-lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /***********************************************\
     #ALIGNMENT CLASSESS
 \***********************************************/

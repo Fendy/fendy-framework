@@ -57,8 +57,9 @@ $color-ui-success: #79BC32;
 $color-ui-error: #ee4f4f;
 $color-ui-warning: #FFC12D;
 
-$color-ui-grey-light: #eeeeee;
-$color-ui-grey-lightest: #f4f7f9;
+$color-ui-grey: #E8E8E8;
+$color-ui-grey-light: #f4f7f9;
+$color-ui-grey-lightest: #F2F2F2;
 
 $color-ui-overlay-light: rgba(0, 0, 0, 0.36);
 $color-ui-overlay-dark: rgba(0, 0, 0, 0.85);
@@ -127,6 +128,9 @@ $subheader-sizes: (
 $line-height-body: 1.5;
 $line-height-header: 1;
 $line-height-paragraph-lead: 2;
+
+$block-truncate-lines: 3;
+$block-truncate-line-height: 24;
 
 
 
