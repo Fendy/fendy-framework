@@ -6,7 +6,8 @@
 //  Typography.........................Values for typography
 //  Breakpoints........................Breakpoints variables
 //  Grid...............................Grid related values
-//  Lists..............................Values for lists
+//  List..............................Values for lists
+//  Button............................Values for button component
 
 /*********************************\
     #GENERIC
@@ -53,13 +54,13 @@ $color-brand-bkg: #F2F4F8;
 /* [3] */
 $color-ui-black: #000000;
 $color-ui-white: #ffffff;
-$color-ui-success: #79BC32;
-$color-ui-error: #ee4f4f;
+$color-ui-success: #13ce66;
+$color-ui-error: #ff4949;
 $color-ui-warning: #FFC12D;
 
 $color-ui-grey: #E8E8E8;
-$color-ui-grey-light: #f4f7f9;
-$color-ui-grey-lightest: #F2F2F2;
+$color-ui-grey-light: #F5F5F5;
+$color-ui-grey-lightest: #FAFAFA;
 
 $color-ui-overlay-light: rgba(0, 0, 0, 0.36);
 $color-ui-overlay-dark: rgba(0, 0, 0, 0.85);
@@ -80,7 +81,7 @@ $color-ui-elevation-modal: rgba(0, 0, 0, 0.60);
 /* [4] */
 $color-social-twitter: #168de9;
 $color-social-facebook: #3b5998;
-$color-social-googleplus: #dd4b39;
+$color-social-google: #dd4b39;
 $color-social-youtube: #bb0000;
 $color-social-linkedin: #007bb5;
 $color-social-pinterest: #cb2027;
@@ -218,9 +219,44 @@ $flexbox-align-content-default: stretch;
 
 
 /*********************************\
-    #LISTS
+    #LIST
 \*********************************/
 
 $list-type-brand-1: '../brand/list-style-image-1.svg';
 $list-type-brand-2: '../brand/list-style-image-2.svg';
 $list-inline-gap: 5px;
+
+
+
+
+
+/*********************************\
+    #BUTTON
+\*********************************/
+
+/**
+ *    Size of the 'border' of the buttons
+ *    In order to keep buttons of the same size this will be used for
+ *    an inset shadow instead of an actual border
+ *    @type {number}
+ */
+$button-border: 1.5px;
+
+
+
+
+
+/**
+ *    Percentage of opacity that will be applied to normal buttons on hover
+ */
+$button-hover-opacity: 10%;
+
+
+
+
+
+/**
+ *    Border radius for your buttons
+ *    Different than -rounded modifier of buttons
+ */
+$button-border-radius: 1px;
