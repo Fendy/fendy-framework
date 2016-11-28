@@ -34,8 +34,8 @@
  *    Helpers..........................Helper classes
  */
 
-@import 'base/base',
-        'base/fonts',
+@import 'base/fonts',
+        'base/base',
         'base/typography',
         'base/helpers';
 
@@ -65,10 +65,10 @@
 
 @import 'components/atom.link',
         'components/atom.list',
+        'components/atom.input',
         'components/atom.button',
         'components/atom.table';
         // 'components/atom.code',
-        // 'components/atom.input',
         // 'components/atom.image',
         // 'components/molecule.form',
         // 'components/molecule.media',
