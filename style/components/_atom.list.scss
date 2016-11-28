@@ -189,27 +189,3 @@ li.list__item.-type-brand-2{
         width: 16px;
     }
 }
-
-
-
-
-
-/**
- *    Sets costume marker for modifier 1
- */
-li.list__item.-type-brand-1:before{
-    background: url($list-type-brand-1) 50% 50% no-repeat;
-    background-size: cover;
-}
-
-
-
-
-
-/**
- *    Sets costume marker for modifier 2
- */
-li.list__item.-type-brand-2:before{
-    background: url($list-type-brand-2) 50% 50% no-repeat;
-    background-size: cover;
-}
