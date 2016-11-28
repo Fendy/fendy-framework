@@ -15,7 +15,7 @@
     Set text color to predefined black
  */
 .h-color-black{
-    color: $color-text;
+    color: $color-text !important;
 }
 
 
@@ -26,7 +26,7 @@
     Set text color to predefined black with opacity
  */
 .h-color-black-l{
-    color: $color-text-light;
+    color: $color-text-light !important;
 }
 
 
@@ -37,7 +37,7 @@
     Set text color to predefined "disabled" black text
  */
 .h-color-black-d{
-    color: $color-text-lightest;
+    color: $color-text-lightest !important;
 }
 
 
@@ -48,7 +48,7 @@
     Set text to predefined white
  */
 .h-color-white{
-    color: $color-text-white;
+    color: $color-text-white !important;
 }
 
 
@@ -59,7 +59,7 @@
     Set text to predefined white with opacity
  */
 .h-color-white-l{
-    color: $color-text-white-light;
+    color: $color-text-white-light !important;
 }
 
 
@@ -70,7 +70,7 @@
     Set text to predefined "disabled" white text
  */
 .h-color-white-d{
-    color: $color-text-white-lightest;
+    color: $color-text-white-lightest !important;
 }
 
 
@@ -81,7 +81,7 @@
     Set text to predefined brand primary color
  */
 .h-color-primary{
-    color: $color-brand-primary
+    color: $color-brand-primary !important;
 }
 
 
@@ -92,7 +92,7 @@
     Set text to predefined brand secondary color
  */
 .h-color-secondary{
-    color: $color-brand-secondary;
+    color: $color-brand-secondary !important;
 }
 
 
@@ -103,7 +103,7 @@
     Set text to predefined ui success color
  */
 .h-color-success{
-    color: $color-ui-success;
+    color: $color-ui-success !important;
 }
 
 
@@ -114,7 +114,7 @@
     Set text to predefined ui warning color
  */
 .h-color-warning{
-    color: $color-ui-warning;
+    color: $color-ui-warning !important;
 }
 
 
@@ -125,7 +125,7 @@
     Set text to predefined ui error color
  */
 .h-color-error{
-    color: $color-ui-error;
+    color: $color-ui-error !important;
 }
 
 
@@ -140,7 +140,7 @@
     Set background color to predefined ui black
  */
 .h-bkg-black{
-    background-color: $color-ui-black;
+    background-color: $color-ui-black !important;
 }
 
 
@@ -151,7 +151,7 @@
     Set background color to predefined ui background white
  */
 .h-bkg-white{
-    background-color: $color-ui-white;
+    background-color: $color-ui-white !important;
 }
 
 
@@ -162,7 +162,7 @@
     Set background color to predefined brand primary color
  */
 .h-bkg-default{
-    background-color: $color-brand-bkg;
+    background-color: $color-brand-bkg !important;
 }
 
 
@@ -173,7 +173,7 @@
     Set background color to predefined brand primary color
  */
 .h-bkg-primary{
-    background-color: $color-brand-primary;
+    background-color: $color-brand-primary !important;
 }
 
 
@@ -184,7 +184,7 @@
     Set background color to predefined brand secondary color
  */
 .h-bkg-secondary{
-    background-color: $color-brand-secondary;
+    background-color: $color-brand-secondary !important;
 }
 
 
@@ -199,7 +199,7 @@
     Set text to uppercase
  */
 .h-txt-uppercase{
-    text-transform: uppercase;
+    text-transform: uppercase !important;
 }
 
 
@@ -210,7 +210,7 @@
     Set text to lowercase
  */
 .h-txt-lowercase{
-    text-transform: lowercase;
+    text-transform: lowercase !important;
 }
 
 
@@ -221,7 +221,7 @@
     Set text to bold
  */
 .h-txt-bold{
-    font-weight: bold;
+    font-weight: bold !important;
 }
 
 
@@ -232,7 +232,7 @@
     Set text to italics
  */
 .h-txt-italic{
-    font-style: italic;
+    font-style: italic !important;
 }
 
 
@@ -243,7 +243,7 @@
     Underline text
  */
 .h-txt-underline{
-    text-decoration: underline;
+    text-decoration: underline !important;
 }
 
 
@@ -254,7 +254,7 @@
     Set text size to small
  */
 .h-txt-small{
-    font-size: 75%;
+    font-size: 75% !important;
 }
 
 
@@ -265,10 +265,10 @@
     Truncate text with ellipsis
  */
 .h-txt-truncate{
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    width: 100% !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 
@@ -280,13 +280,13 @@
     @require $block-truncate-lines variable
  */
 .h-txt-truncate-multiline{
-    display: block;
-    display: -webkit-box;
-    height: calc($block-truncate-lines * $block-truncate-line-height + 1)px;
-    -webkit-line-clamp: $block-truncate-lines;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: block !important;
+    display: -webkit-box !important;
+    height: calc($block-truncate-lines * $block-truncate-line-height + 1)px !important;
+    -webkit-line-clamp: $block-truncate-lines !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 /***********************************************\
@@ -297,7 +297,7 @@
     Align text to left
  */
 .h-align-left{
-    text-align: left;
+    text-align: left !important;
 }
 
 
@@ -308,7 +308,7 @@
     Align text to center
  */
 .h-align-center{
-    text-align: center;
+    text-align: center !important;
 }
 
 
@@ -319,7 +319,7 @@
     Align text to right
  */
 .h-align-right{
-    text-align: right;
+    text-align: right !important;
 }
 
 
@@ -330,9 +330,9 @@
     Vertically align element to center
  */
 .h-valign-center{
-    position: relative;
-    top: 50%;
-    @include transform(translateY(-50%));
+    position: relative !important;
+    top: 50% !important;
+    @include transform(translateY(-50% !important));
 }
 
 
@@ -343,8 +343,8 @@
     Horizontally align block element to center
  */
 .h-align-block-center{
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 
@@ -359,7 +359,7 @@
     Display element as inline
  */
 .h-display-inline{
-    display: inline;
+    display: inline !important;
 }
 
 
@@ -370,7 +370,7 @@
     Display element as block
  */
 .h-display-block{
-    display: block;
+    display: block !important;
 }
 
 
@@ -381,7 +381,7 @@
     Display element as inline-block
  */
 .h-display-ib{
-    display: inline-block;
+    display: inline-block !important;
 }
 
 
@@ -391,7 +391,7 @@
 /*
     Show element on small devices
  */
-.h-visible{ visibility: visible;}
+.h-visible{ visibility: visible !important;}
 
 
 
@@ -401,7 +401,7 @@
     Show element on tablet-size devices
  */
 .h-visible-tab{
-    @include respond-to('tab'){ visibility: visible; }
+    @include respond-to('tab'){ visibility: visible !important; }
 }
 
 
@@ -412,7 +412,7 @@
     Show element on laptop devices
  */
 .h-visible-lap{
-    @include respond-to('lap'){ visibility: visible; }
+    @include respond-to('lap'){ visibility: visible !important; }
 }
 
 
@@ -423,7 +423,7 @@
     Show element on desktop devices
  */
 .h-visible-desk{
-    @include respond-to('desk'){ visibility: visible;}
+    @include respond-to('desk'){ visibility: visible !important;}
 }
 
 
@@ -433,7 +433,7 @@
 /*
     Make element invisible on small devices
  */
-.h-invisible{ visibility: hidden; }
+.h-invisible{ visibility: hidden !important; }
 
 
 
@@ -443,7 +443,7 @@
     Make element invisible on tablet-size devices
  */
 .h-invisible-tab{
-    @include respond-to('tab'){ visibility: hidden; }
+    @include respond-to('tab'){ visibility: hidden !important; }
 }
 
 
@@ -454,7 +454,7 @@
     Make element invisible on laptop devices
  */
 .h-invisible-lap{
-    @include respond-to('lap'){ visibility: hidden; }
+    @include respond-to('lap'){ visibility: hidden !important; }
 }
 
 
@@ -465,7 +465,7 @@
     Make element invisible on desktop devices
  */
 .h-invisible-desk{
-    @include respond-to('desk'){ visibility: hidden; }
+    @include respond-to('desk'){ visibility: hidden !important; }
 }
 
 
@@ -476,7 +476,7 @@
     Hide element on small devices
  */
 .h-hide{
-    display: none;
+    display: none !important;
 }
 
 
@@ -487,7 +487,7 @@
     Hide element on tablet-size devices
  */
 .h-hide-tab{
-    @include respond-to('tab'){ display: none; }
+    @include respond-to('tab'){ display: none !important; }
 }
 
 
@@ -498,7 +498,7 @@
     Hide element on laptop devices
  */
 .h-hide-lap{
-    @include respond-to('lap'){ display: none; }
+    @include respond-to('lap'){ display: none !important; }
 }
 
 
@@ -509,5 +509,49 @@
     Hide element on desktop devices
  */
 .h-hide-desk{
-    @include respond-to('desk'){ display: none; }
+    @include respond-to('desk'){ display: none !important; }
+}
+
+
+
+
+
+/*
+    Show element on small devices
+ */
+.h-show{
+    display: block !important;
+}
+
+
+
+
+
+/*
+    Show element on tablet-size devices
+ */
+.h-show-tab{
+    @include respond-to('tab'){ display: block !important; }
+}
+
+
+
+
+
+/*
+    Show element on laptop devices
+ */
+.h-show-lap{
+    @include respond-to('lap'){ display: block !important; }
+}
+
+
+
+
+
+/*
+    Show element on desktop devices
+ */
+.h-show-desk{
+    @include respond-to('desk'){ display: block !important; }
 }
