@@ -1,0 +1,328 @@
+//------------------------------------------------------------------------------
+//  This file contains all styles related to the input component
+//------------------------------------------------------------------------------
+
+/**
+ *    Overrides default color of input placeholder text
+ */
+::-webkit-input-placeholder {   color: $color-ui-placeholder; }
+::-moz-placeholder {            color: $color-ui-placeholder; }
+:-ms-input-placeholder {        color: $color-ui-placeholder; }
+input:-moz-placeholder {        color: $color-ui-placeholder; }
+
+
+
+
+
+/**
+ *    Set pointer cursor for labels assigned to an input
+ */
+label{
+    cursor: pointer;
+}
+
+
+
+
+
+/**
+ *    Reset base input styles
+ */
+input,
+input.input{
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 15px;
+    max-width: 100%;
+    vertical-align: middle;
+
+    &.is-disabled,
+    &[disabled],
+    &[disbled="true"]{
+        cursor: not-allowed;
+        border: 2px solid $color-ui-grey;
+        background-color: $color-ui-grey-lightest;
+    }
+
+    &.-medium{ padding: 15px 17px; }
+
+    &.-large{ padding: 20px; }
+}
+
+
+
+
+
+/**
+ *    Style checkbox input
+ *    Hide default checkbox "box" and replace it with costum one
+ */
+input[type="checkbox"],
+input[type="checkbox"].checkbox{
+    width: 1.35rem;
+    height: 1.35rem;
+    position: relative;
+    visibility: hidden;
+    vertical-align: sub;
+
+    /*
+        This is the box
+     */
+    &:before{
+        content: '';
+        @include transition($global-animation);
+        visibility: visible;
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 3px;
+        background-color: $color-ui-grey;
+    }
+
+    /*
+        This is the check in pure css
+     */
+    &:after{
+        content: '';
+        @include transition($global-animation);
+        position: absolute;
+        top: 48%;
+        left: 25%;
+        visibility: visible;
+        display: block;
+        width: 30%;
+        height: 60%;
+        border: solid $color-ui-white;
+        border-width: 0 0.18em 0.18em 0;
+        @include transform(rotate(45deg) translate(-50%, -50%));
+    }
+
+    /*
+        Change colors when box is checked
+     */
+    &:checked{
+        &:before{ background-color: $color-brand-primary; }
+        &:after{ border-color: $color-ui-white; }
+    }
+
+    /*
+        Modifier to create a circle box
+     */
+    &.-rounded{
+        &:before{ border-radius: 100%; }
+    }
+}
+
+
+input[type="radio"],
+input[type="radio"].radio{
+    width: 1.5rem;
+    height: 1.5rem;
+    position: relative;
+    visibility: hidden;
+    vertical-align: sub;
+
+    /*
+        This is the box
+     */
+    &:before{
+        content: '';
+        @include transition($global-animation);
+        visibility: visible;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        border: 3px solid $color-ui-grey;
+        border-radius: 100%;
+    }
+
+    /*
+        This is the check in pure css
+     */
+    &:after{
+        content: '';
+        @include transition($global-animation);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        visibility: hidden;
+        display: inline-block;
+        width: 0.813em;
+        height: 0.813em;
+        border-radius: 100%;
+        background-color: $color-ui-grey;
+        @include transform(translate(-50%, -50%) scale(0, 0));
+    }
+
+    &:hover{
+        &:after{
+            visibility: visible;
+            @include transform(translate(-50%, -50%) scale(0.7, 0.7));
+        }
+    }
+
+    /*
+        Change colors when box is checked
+     */
+    &:checked{
+        &:before{ border-color: $color-brand-primary; }
+        &:after{
+            visibility: visible;
+            @include transform(translate(-50%, -50%) scale(1, 1));
+            background-color: $color-brand-primary;
+        }
+    }
+}
+
+select,
+select.select{
+    border: 0;
+    outline: none;
+    padding: 10px 40px 10px 15px;
+    cursor: pointer;
+    @include prefix((appearance: none));
+
+
+    background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), radial-gradient(#ddd 70%, transparent 72%);
+    background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - .5em) .5em;
+    background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+    background-repeat: no-repeat;
+}
+
+/**
+ *    Creates a variation of input that has background color
+ */
+input.input--filled{
+    @extend .input;
+    @include transition($global-animation);
+    background-color: $color-ui-grey-light;
+
+
+    // &:hover,
+    // &:focus{
+    //     background-color: darken($color-ui-grey-light, 6%);
+    // }
+}
+
+
+
+
+
+/**
+ *    Creates a variation of input that has a border bottom
+ */
+input.input--line{
+    @extend .input;
+    @include transition($global-animation);
+    border-bottom: 2px solid $color-ui-grey-light;
+
+
+    // &:hover,
+    // &:focus{
+    //     background-color: darken($color-ui-grey-light, 6%);
+    // }
+}
+
+
+// /**
+//  *    Overrides default color of input placeholder text
+//  */
+// ::-webkit-input-placeholder {   color: $color-ui-placeholder; }
+// ::-moz-placeholder {            color: $color-ui-placeholder; }
+// :-ms-input-placeholder {        color: $color-ui-placeholder; }
+// input:-moz-placeholder {        color: $color-ui-placeholder; }
+//
+// .input--ghost.-bkg-white::-webkit-input-placeholder {   color: $color-text-white; }
+// .input--ghost.-bkg-white::-moz-placeholder {            color: $color-text-white; }
+// .input--ghost.-bkg-white:-ms-input-placeholder {        color: $color-text-white; }
+// .input--ghost.-bkg-white:-moz-placeholder {        color: $color-text-white; }
+//
+//
+//
+//
+//
+// /**
+//  *    Resets default style of input element
+//  */
+// input{
+//     @include transition(background-color $global-animation-duration $global-animation-timing);
+//     border: 0;
+//     outline: none;
+//     cursor: pointer;
+//     padding: 0.5rem 1rem;
+//     background-color: $color-ui-grey-light;
+//     font-size: 1em;
+//     color: $color-text;
+//     border-radius: 0;
+//
+//     &.-flat{
+//         background-color: transparent;
+//     }
+//
+//     &.-rounded-corners{
+//         border-radius: $button-border-radius;
+//     }
+//
+//     &.-hover-darker:hover,
+//     &.-hover-darker:focus{
+//         background-color: $color-ui-grey;
+//     }
+//
+//     &.-hover-primary:hover,
+//     &.-hover-primary:focus{
+//         background-color: $color-brand-primary;
+//     }
+//
+//     &.-hover-secondary:hover,
+//     &.-hover-secondary:focus{
+//         background-color: $color-brand-secondary;
+//     }
+//
+//     &.-hover-success:hover,
+//     &.-hover-success:focus{
+//         background-color: $color-ui-success;
+//     }
+// }
+//
+// input.input{
+//     @extend input;
+//
+//     &.-flat{
+//         background-color: transparent;
+//     }
+//
+//     &.-rounded{ border-radius: 20em; }
+//
+//     &.is-disabled,
+//     &[disabled="true"],
+//     &[disabled]{
+//         cursor: not-allowed;
+//         background-color: $color-ui-grey-light;
+//         color: $color-text-lightest;
+//         box-shadow: inset 0 0 0 $button-border $color-ui-grey;
+//     }
+// }
+//
+// input.input--ghost{
+//     @extend input;
+//     background-color: transparent;
+//     border: 2px solid $color-ui-grey-light;
+//
+//     &.-flat{
+//         background-color: transparent;
+//     }
+// }
+//
+// input.input--line{
+//     @extend input;
+//     @include transition(border-color $global-animation-duration $global-animation-timing);
+//     background-color: transparent;
+//     padding: 0.5rem;
+//     border-bottom: 2px solid $color-ui-grey-light;
+//     border-radius: 0;
+//
+//     &.-flat{
+//         background-color: transparent;
+//     }
+// }
