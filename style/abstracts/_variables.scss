@@ -70,7 +70,7 @@ $color-ui-hightlight: rgba($color-brand-primary, 0.35);
 $color-ui-tap-highlight: transparent;
 
 $color-ui-scroll-bar: $color-brand-primary;
-$color-ui-placeholder: $color-text-lightest;
+$color-ui-placeholder: $color-text-light;
 
 $color-ui-elevation-resting: rgba(0, 0, 0, 0.6);
 $color-ui-elevation-header: rgba(0, 0, 0, 0.12);
@@ -258,7 +258,7 @@ $button-hover-opacity: 10%;
  *    Border radius for your buttons
  *    Different than -rounded modifier of buttons
  */
-$button-border-radius: 1px;
+$button-border-radius: 5px;
 
 
 

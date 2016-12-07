@@ -10,6 +10,28 @@
 :-ms-input-placeholder {        color: $color-ui-placeholder; }
 input:-moz-placeholder {        color: $color-ui-placeholder; }
 
+.is-disabled::-webkit-input-placeholder,
+[disabled]::-webkit-input-placeholder,
+[disbled="true"]::-webkit-input-placeholder {   color: $color-text-lightest; }
+.is-disabled::-moz-placeholder,
+[disabled]::-moz-placeholder,
+[disbled="true"]::-moz-placeholder {            color: $color-text-lightest; }
+.is-disabled:-ms-input-placeholder,
+[disabled]:-ms-input-placeholder,
+[disbled="true"]:-ms-input-placeholder {        color: $color-text-lightest; }
+.is-disabled:-moz-placeholder,
+[disabled]:-moz-placeholder,
+[disbled="true"]:-moz-placeholder {             color: $color-text-lightest; }
+
+::-webkit-datetime-edit { padding: 0; width: 100%; }
+::-webkit-datetime-edit-fields-wrapper { width: 100%; }
+::-webkit-datetime-edit-text { padding: 5px; }
+::-webkit-datetime-edit-month-field { }
+::-webkit-datetime-edit-day-field {  }
+::-webkit-datetime-edit-year-field {  }
+::-webkit-calendar-picker-indicator { background: transparent; }
+input[type="date"]::-webkit-inner-spin-button { display: none; }
+
 
 
 
@@ -33,21 +55,17 @@ input.input{
     border: 0;
     outline: none;
     cursor: pointer;
-    padding: 10px 15px;
+    padding: 10px 15px 7px 0;
     max-width: 100%;
     vertical-align: middle;
+    border-bottom: 2px solid $color-ui-grey;
 
     &.is-disabled,
     &[disabled],
     &[disbled="true"]{
         cursor: not-allowed;
-        border: 2px solid $color-ui-grey;
-        background-color: $color-ui-grey-lightest;
+        border-color: $color-ui-grey-light;
     }
-
-    &.-medium{ padding: 15px 17px; }
-
-    &.-large{ padding: 20px; }
 }
 
 
@@ -190,6 +208,32 @@ select.select{
     background-repeat: no-repeat;
 }
 
+input[type="file"],
+input[type="file"].file{
+    overflow: hidden;
+    position: relative;
+    min-width: 10rem;
+
+    &::-webkit-file-upload-button{
+      visibility: hidden;
+      opacity: 0;
+      width: 2rem;
+    }
+
+    &:before{
+        content: '';
+        opacity: 1;
+        display: inline-block;
+        width: 1.5rem;
+        height: 1.5rem;
+        background-image: radial-gradient(#ddd 70%, transparent 72%);
+        background-position: 0;
+        background-size: 1.5rem 1.5rem;
+        background-repeat: no-repeat;
+        vertical-align: middle;
+    }
+}
+
 /**
  *    Creates a variation of input that has background color
  */
@@ -214,8 +258,8 @@ input.input--filled{
  */
 input.input--line{
     @extend .input;
-    @include transition($global-animation);
-    border-bottom: 2px solid $color-ui-grey-light;
+    //@include transition($global-animation);
+
 
 
     // &:hover,
