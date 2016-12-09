@@ -23,14 +23,6 @@ input:-moz-placeholder {        color: $color-ui-placeholder; }
 [disabled]:-moz-placeholder,
 [disbled="true"]:-moz-placeholder {             color: $color-text-lightest; }
 
-::-webkit-datetime-edit { padding: 0; width: 100%; }
-::-webkit-datetime-edit-fields-wrapper { width: 100%; }
-::-webkit-datetime-edit-text { padding: 5px; }
-::-webkit-datetime-edit-month-field { }
-::-webkit-datetime-edit-day-field {  }
-::-webkit-datetime-edit-year-field {  }
-::-webkit-calendar-picker-indicator { background: transparent; }
-input[type="date"]::-webkit-inner-spin-button { display: none; }
 
 
 
@@ -208,19 +200,25 @@ select.select{
     background-repeat: no-repeat;
 }
 
+/**
+ *    Override style for file input
+ *    1) Hide ugly default upload button
+ *    2) Create pseudoelement to show icon or counter to be implemented using JS
+ *    3) Style component
+ */
 input[type="file"],
-input[type="file"].file{
+input[type="file"].file-input{
     overflow: hidden;
     position: relative;
     min-width: 10rem;
 
-    &::-webkit-file-upload-button{
+    &::-webkit-file-upload-button{  // [ 1 ]
       visibility: hidden;
       opacity: 0;
       width: 2rem;
     }
 
-    &:before{
+    &:before{      // [ 2 ]
         content: '';
         opacity: 1;
         display: inline-block;
@@ -233,6 +231,40 @@ input[type="file"].file{
         vertical-align: middle;
     }
 }
+// [ 3 ]
+::-webkit-datetime-edit { padding: 0; width: 100%; }
+::-webkit-datetime-edit-fields-wrapper { width: 100%; }
+::-webkit-datetime-edit-text { padding: 5px; }
+::-webkit-datetime-edit-month-field { }
+::-webkit-datetime-edit-day-field {  }
+::-webkit-datetime-edit-year-field {  }
+::-webkit-calendar-picker-indicator { background: transparent; }
+input[type="date"]::-webkit-inner-spin-button { display: none; }
+
+
+
+
+
+/**
+ *    Override style for input color
+ *    1) Overrides user agent appearance to create a circle
+ */
+::-webkit-color-swatch-wrapper { padding: 0; }
+::-webkit-color-swatch {    // [ 1 ]
+    border: none;
+    border-radius: 100%;
+    width: 33px;
+    height: 29px;
+}
+input[type="color"]{
+    background-color: transparent;
+    border: none;
+}
+
+
+
+
+
 
 /**
  *    Creates a variation of input that has background color
