@@ -1,32 +1,25 @@
 //------------------------------------------------------------------------------
 //  This file contains all styles related to the input component
 //------------------------------------------------------------------------------
-
-/**
- *    Overrides default color of input placeholder text
- */
-::-webkit-input-placeholder {   color: $color-ui-placeholder; }
-::-moz-placeholder {            color: $color-ui-placeholder; }
-:-ms-input-placeholder {        color: $color-ui-placeholder; }
-input:-moz-placeholder {        color: $color-ui-placeholder; }
-
-.is-disabled::-webkit-input-placeholder,
-[disabled]::-webkit-input-placeholder,
-[disbled="true"]::-webkit-input-placeholder {   color: $color-text-lightest; }
-.is-disabled::-moz-placeholder,
-[disabled]::-moz-placeholder,
-[disbled="true"]::-moz-placeholder {            color: $color-text-lightest; }
-.is-disabled:-ms-input-placeholder,
-[disabled]:-ms-input-placeholder,
-[disbled="true"]:-ms-input-placeholder {        color: $color-text-lightest; }
-.is-disabled:-moz-placeholder,
-[disabled]:-moz-placeholder,
-[disbled="true"]:-moz-placeholder {             color: $color-text-lightest; }
+//  CONTENT:
+//  1. Labels
+//  2. Base input
+//  3. Textfield-like inputs
+//  4. Checkboxes
+//  5. Radio buttons
+//  6. Selects
+//  7. Files
+//  8. Colors
+//  9. Dates
+//  10. Ranges
 
 
 
 
 
+/*******************************************************************\
+    #Labels
+\*******************************************************************/
 
 /**
  *    Set pointer cursor for labels assigned to an input
@@ -39,17 +32,72 @@ label{
 
 
 
+/*******************************************************************\
+    #Base input
+\*******************************************************************/
+
+/**
+ *    Overrides default color of input placeholder text
+ */
+::-webkit-input-placeholder {   color: $color-ui-placeholder; }
+::-moz-placeholder {            color: $color-ui-placeholder; }
+:-ms-input-placeholder {        color: $color-ui-placeholder; }
+input:-moz-placeholder {        color: $color-ui-placeholder; }
+
+
+
+
+
 /**
  *    Reset base input styles
  */
-input,
-input.input{
+input, .input{
     border: 0;
     outline: none;
     cursor: pointer;
+    vertical-align: middle;
+
+    /*
+        Define style for disabled state
+     */
+    &.is-disabled,
+    &[disabled],
+    &[disbled="true"]{
+        cursor: not-allowed;
+
+        &::-webkit-input-placeholder {   color: $color-text-lightest; }
+        &::-moz-placeholder {            color: $color-text-lightest; }
+        &:-ms-input-placeholder {        color: $color-text-lightest; }
+        &:-moz-placeholder {             color: $color-text-lightest; }
+    }
+}
+
+
+
+
+
+/*******************************************************************\
+    #Textfield-like inputs
+\*******************************************************************/
+
+/**
+ *    Define 'textfield' inputs base style
+ *    By dafault, 'textfield' like inputs will present a border bottom
+ */
+input[type="text"], .input-text,
+input[type="password"], .input-password,
+input[type="date"], .input-date,
+input[type="datetime-local"], .input-datetime,
+input[type="email"], .input-email,
+input[type="month"], .input-month,
+input[type="number"], .input-number,
+input[type="search"], .input-search,
+input[type="tel"], .input-tel,
+input[type="time"], .input-time,
+input[type="url"], .input-url,
+input[type="week"], .input-week{
     padding: 10px 15px 7px 0;
     max-width: 100%;
-    vertical-align: middle;
     border-bottom: 2px solid $color-ui-grey;
 
     &.is-disabled,
@@ -64,12 +112,15 @@ input.input{
 
 
 
+/*******************************************************************\
+    #Checkboxes
+\*******************************************************************/
+
 /**
  *    Style checkbox input
  *    Hide default checkbox "box" and replace it with costum one
  */
-input[type="checkbox"],
-input[type="checkbox"].checkbox{
+input[type="checkbox"], .input-checkbox{
     width: 1.35rem;
     height: 1.35rem;
     position: relative;
@@ -125,8 +176,18 @@ input[type="checkbox"].checkbox{
 }
 
 
-input[type="radio"],
-input[type="radio"].radio{
+
+
+
+/*******************************************************************\
+    #Radio buttons
+\*******************************************************************/
+
+/**
+ *    Style radio button
+ *    @type {String}
+ */
+input[type="radio"], .input-radio{
     width: 1.5rem;
     height: 1.5rem;
     position: relative;
@@ -185,29 +246,47 @@ input[type="radio"].radio{
     }
 }
 
-select,
-select.select{
+
+
+
+
+/*******************************************************************\
+    #Selects
+\*******************************************************************/
+
+/**
+ *    Define style for select input
+ */
+select, .input-select{
     border: 0;
     outline: none;
     padding: 10px 40px 10px 15px;
     cursor: pointer;
     @include prefix((appearance: none));
 
-
+    /**
+     *    Creates chevron using pure css
+     */
     background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), radial-gradient(#ddd 70%, transparent 72%);
     background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - .5em) .5em;
     background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
     background-repeat: no-repeat;
 }
 
+
+
+
+
+/*******************************************************************\
+    #Files
+\*******************************************************************/
+
 /**
- *    Override style for file input
+ *    Define style for file input
  *    1) Hide ugly default upload button
  *    2) Create pseudoelement to show icon or counter to be implemented using JS
- *    3) Style component
  */
-input[type="file"],
-input[type="file"].file-input{
+input[type="file"], .input-file{
     overflow: hidden;
     position: relative;
     min-width: 10rem;
@@ -231,22 +310,29 @@ input[type="file"].file-input{
         vertical-align: middle;
     }
 }
-// [ 3 ]
-::-webkit-datetime-edit { padding: 0; width: 100%; }
-::-webkit-datetime-edit-fields-wrapper { width: 100%; }
-::-webkit-datetime-edit-text { padding: 5px; }
-::-webkit-datetime-edit-month-field { }
-::-webkit-datetime-edit-day-field {  }
-::-webkit-datetime-edit-year-field {  }
-::-webkit-calendar-picker-indicator { background: transparent; }
-input[type="date"]::-webkit-inner-spin-button { display: none; }
 
 
 
 
+
+/*******************************************************************\
+    #Colors
+\*******************************************************************/
 
 /**
- *    Override style for input color
+ *    Defines style for color input
+ */
+input[type="color"]{
+    background-color: transparent;
+    border: none;
+    padding: 0 15px 0 0;
+    max-width: 100%;
+    min-height: 30px;
+    vertical-align: middle;
+}
+
+/**
+ *    Overrides default browser behaviour
  *    1) Overrides user agent appearance to create a circle
  */
 ::-webkit-color-swatch-wrapper { padding: 0; }
@@ -256,149 +342,130 @@ input[type="date"]::-webkit-inner-spin-button { display: none; }
     width: 33px;
     height: 29px;
 }
-input[type="color"]{
-    background-color: transparent;
-    border: none;
-}
 
 
 
 
 
-
-/**
- *    Creates a variation of input that has background color
- */
-input.input--filled{
-    @extend .input;
-    @include transition($global-animation);
-    background-color: $color-ui-grey-light;
-
-
-    // &:hover,
-    // &:focus{
-    //     background-color: darken($color-ui-grey-light, 6%);
-    // }
-}
-
-
-
-
+/*******************************************************************\
+    #Dates
+\*******************************************************************/
 
 /**
- *    Creates a variation of input that has a border bottom
+ *    Overrides default browser behaviour
+ *    1) Hide input spin control only for date inputs
  */
-input.input--line{
-    @extend .input;
-    //@include transition($global-animation);
+::-webkit-datetime-edit { padding: 0; width: 100%; }    // Outter input box
+::-webkit-datetime-edit-fields-wrapper { width: 100%; } // Inside input box
+::-webkit-datetime-edit-text { padding: 5px; }          // Field text
+::-webkit-datetime-edit-month-field { }                 // Specific for month field
+::-webkit-datetime-edit-day-field {  }                  // Specific for day field
+::-webkit-datetime-edit-year-field {  }                 // Specific for year field
+::-webkit-calendar-picker-indicator { background: transparent; }    // Picker box
+input[type="date"]::-webkit-inner-spin-button { display: none; }    // [ 1 ]
 
 
 
-    // &:hover,
-    // &:focus{
-    //     background-color: darken($color-ui-grey-light, 6%);
-    // }
+
+
+/*******************************************************************\
+    #Ranges
+\*******************************************************************/
+
+/**
+ *    Override style for input range
+ *    1) Override range track style
+ *    2) Override range thumb style
+ */
+input[type=range] {
+    -webkit-appearance: none;
+    outline: none;
+    margin: 18px 0;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    // [ 1 ]
+    &::-webkit-slider-runnable-track{   // Webkit support
+        width: 100%;
+        height: 5px;
+        background: $color-brand-primary;
+        border-radius: 3px;
+        @include transition($global-animation);
+    }
+
+    &:hover::-webkit-slider-runnable-track,
+    &:focus::-webkit-slider-runnable-track {    // Manage color change on hover/focus
+        background-color: darken($color-brand-primary, 6%);
+    }
+
+    &::-moz-range-track {   // Mozilla support
+        width: 100%;
+        height: 8.4px;
+        cursor: pointer;
+        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+        background: #3071a9;
+        border-radius: 1.3px;
+        border: 0.2px solid #010101;
+    }
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        cursor: pointer;
+        height: 1rem;
+        width: 1rem;
+        border-radius: 100%;
+        background: $color-brand-primary;
+        margin-top: -0.3rem;
+        border: 2px solid $color-ui-white;
+        @include transition($global-animation)
+    }
+
+    &:hover::-webkit-slider-thumb,
+    &:focus::-webkit-slider-thumb {
+        box-shadow: 0px 0px 0px 10px rgba(0, 0, 0, 0.06);
+    }
+
+
+
+    &::-moz-range-thumb {
+      box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+      border: 1px solid #000000;
+      height: 36px;
+      width: 16px;
+      border-radius: 3px;
+      background: #ffffff;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -14px;
+    }
+
+    &::-ms-track {
+      width: 100%;
+      height: 8.4px;
+      cursor: pointer;
+      animate: 0.2s;
+      background: transparent;
+      border-color: transparent;
+      border-width: 16px 0;
+      color: transparent;
+    }
+
+    &::-ms-fill-lower,
+    &::-ms-fill-upper {
+      background: #2a6495;
+      border: 0.2px solid #010101;
+      border-radius: 2.6px;
+      box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    }
+
+    &::-ms-thumb {
+      box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+      border: 1px solid #000000;
+      height: 36px;
+      width: 16px;
+      border-radius: 3px;
+      background: #ffffff;
+      cursor: pointer;
+    }
 }
-
-
-// /**
-//  *    Overrides default color of input placeholder text
-//  */
-// ::-webkit-input-placeholder {   color: $color-ui-placeholder; }
-// ::-moz-placeholder {            color: $color-ui-placeholder; }
-// :-ms-input-placeholder {        color: $color-ui-placeholder; }
-// input:-moz-placeholder {        color: $color-ui-placeholder; }
-//
-// .input--ghost.-bkg-white::-webkit-input-placeholder {   color: $color-text-white; }
-// .input--ghost.-bkg-white::-moz-placeholder {            color: $color-text-white; }
-// .input--ghost.-bkg-white:-ms-input-placeholder {        color: $color-text-white; }
-// .input--ghost.-bkg-white:-moz-placeholder {        color: $color-text-white; }
-//
-//
-//
-//
-//
-// /**
-//  *    Resets default style of input element
-//  */
-// input{
-//     @include transition(background-color $global-animation-duration $global-animation-timing);
-//     border: 0;
-//     outline: none;
-//     cursor: pointer;
-//     padding: 0.5rem 1rem;
-//     background-color: $color-ui-grey-light;
-//     font-size: 1em;
-//     color: $color-text;
-//     border-radius: 0;
-//
-//     &.-flat{
-//         background-color: transparent;
-//     }
-//
-//     &.-rounded-corners{
-//         border-radius: $button-border-radius;
-//     }
-//
-//     &.-hover-darker:hover,
-//     &.-hover-darker:focus{
-//         background-color: $color-ui-grey;
-//     }
-//
-//     &.-hover-primary:hover,
-//     &.-hover-primary:focus{
-//         background-color: $color-brand-primary;
-//     }
-//
-//     &.-hover-secondary:hover,
-//     &.-hover-secondary:focus{
-//         background-color: $color-brand-secondary;
-//     }
-//
-//     &.-hover-success:hover,
-//     &.-hover-success:focus{
-//         background-color: $color-ui-success;
-//     }
-// }
-//
-// input.input{
-//     @extend input;
-//
-//     &.-flat{
-//         background-color: transparent;
-//     }
-//
-//     &.-rounded{ border-radius: 20em; }
-//
-//     &.is-disabled,
-//     &[disabled="true"],
-//     &[disabled]{
-//         cursor: not-allowed;
-//         background-color: $color-ui-grey-light;
-//         color: $color-text-lightest;
-//         box-shadow: inset 0 0 0 $button-border $color-ui-grey;
-//     }
-// }
-//
-// input.input--ghost{
-//     @extend input;
-//     background-color: transparent;
-//     border: 2px solid $color-ui-grey-light;
-//
-//     &.-flat{
-//         background-color: transparent;
-//     }
-// }
-//
-// input.input--line{
-//     @extend input;
-//     @include transition(border-color $global-animation-duration $global-animation-timing);
-//     background-color: transparent;
-//     padding: 0.5rem;
-//     border-bottom: 2px solid $color-ui-grey-light;
-//     border-radius: 0;
-//
-//     &.-flat{
-//         background-color: transparent;
-//     }
-// }
