@@ -7,6 +7,7 @@
  */
 a{
     @include transition($global-animation);
+    outline: none;
     cursor: pointer;
     text-decoration: none;
     color: inherit;
@@ -26,7 +27,8 @@ a.link{
     @include transition(color $global-animation-duration $global-animation-timing);
     color: $color-text;
 
-    &:hover{
+    &:hover,
+    &:focus{
         color: $color-text-light;
     }
 
@@ -77,7 +79,8 @@ a.link--underlined{
         background-color: $color-text;
     }
 
-    &:hover{
+    &:hover,
+    &:focus{
         color: $color-text-light;
 
         &:before{
@@ -145,7 +148,8 @@ a.link--awesome{
         background-color: $color-text;
     }
 
-    &:hover:before{
+    &:hover:before,
+    &:focus:before{
         width: 100%;
     }
 
@@ -160,7 +164,8 @@ a.link--awesome{
 
         &:before{ background-color:$color-brand-primary; }
 
-        &:hover{
+        &:hover,
+        &:focus{
             color: $color-brand-primary;
         }
     }
