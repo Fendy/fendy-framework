@@ -51,7 +51,8 @@ input:-moz-placeholder {        color: $color-ui-placeholder; }
 /**
  *    Reset base input styles
  */
-input, .input{
+input, .input,
+select, .input-select{
     border: 0;
     outline: none;
     cursor: pointer;
@@ -87,11 +88,13 @@ input, .input{
 input[type="text"], .input-text,
 input[type="password"], .input-password,
 input[type="date"], .input-date,
-input[type="datetime-local"], .input-datetime,
+input[type="datetime-local"], .input-datetime-local,
 input[type="email"], .input-email,
+input[type="file"], .input-file,
 input[type="month"], .input-month,
 input[type="number"], .input-number,
 input[type="search"], .input-search,
+input[type="select"], .input-select,
 input[type="tel"], .input-tel,
 input[type="time"], .input-time,
 input[type="url"], .input-url,
@@ -258,19 +261,28 @@ input[type="radio"], .input-radio{
  *    Define style for select input
  */
 select, .input-select{
-    border: 0;
-    outline: none;
-    padding: 10px 40px 10px 15px;
-    cursor: pointer;
-    @include prefix((appearance: none));
+    padding: 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: transparent;
+    padding: 10px 3rem 7px 0;
+    max-width: 100%;
+    border-bottom: 2px solid $color-ui-grey;
 
     /**
      *    Creates chevron using pure css
      */
-    background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), radial-gradient(#ddd 70%, transparent 72%);
-    background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - .5em) .5em;
-    background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+    background-image: linear-gradient(45deg, transparent 50%, $color-text 50%), linear-gradient(135deg, $color-text 50%, transparent 50%);
+    background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 13.6px) calc(1em + 2px);
+    background-size: 5px 5px, 6.5px 5px;
     background-repeat: no-repeat;
+
+    &.-circular-chevron{
+        background-image: linear-gradient(45deg, transparent 50%, $color-text 50%), linear-gradient(135deg, $color-text 50%, transparent 50%), radial-gradient($color-ui-grey 70%, transparent 72%);
+        background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 13.6px) calc(1em + 2px), calc(100% - .5em) .5em;
+        background-size: 5px 5px, 6.5px 5px, 1.5em 1.5em;
+        background-repeat: no-repeat;
+    }
 }
 
 
@@ -353,7 +365,7 @@ input[type="color"]{
 
 /**
  *    Overrides default browser behaviour
- *    1) Hide input spin control only for date inputs
+ *    1) Hide input spin control only for date related inputs
  */
 ::-webkit-datetime-edit { padding: 0; width: 100%; }    // Outter input box
 ::-webkit-datetime-edit-fields-wrapper { width: 100%; } // Inside input box
@@ -362,7 +374,10 @@ input[type="color"]{
 ::-webkit-datetime-edit-day-field {  }                  // Specific for day field
 ::-webkit-datetime-edit-year-field {  }                 // Specific for year field
 ::-webkit-calendar-picker-indicator { background: transparent; }    // Picker box
-input[type="date"]::-webkit-inner-spin-button { display: none; }    // [ 1 ]
+input[type="date"]::-webkit-inner-spin-button,
+input[type="datetime-local"]::-webkit-inner-spin-button,
+input[type="month"]::-webkit-inner-spin-button,
+input[type="week"]::-webkit-inner-spin-button { display: none; }    // [ 1 ]
 
 
 
@@ -374,8 +389,6 @@ input[type="date"]::-webkit-inner-spin-button { display: none; }    // [ 1 ]
 
 /**
  *    Override style for input range
- *    1) Override range track style
- *    2) Override range thumb style
  */
 input[type=range] {
     -webkit-appearance: none;
@@ -385,8 +398,12 @@ input[type=range] {
     margin-top: 1rem;
     margin-bottom: 1rem;
 
-    // [ 1 ]
-    &::-webkit-slider-runnable-track{   // Webkit support
+    /*
+        Overrides range track style
+     */
+
+    // Override for webkit
+    &::-webkit-slider-runnable-track{
         width: 100%;
         height: 5px;
         background: $color-brand-primary;
@@ -395,20 +412,58 @@ input[type=range] {
     }
 
     &:hover::-webkit-slider-runnable-track,
-    &:focus::-webkit-slider-runnable-track {    // Manage color change on hover/focus
+    &:focus::-webkit-slider-runnable-track {
         background-color: darken($color-brand-primary, 6%);
     }
 
-    &::-moz-range-track {   // Mozilla support
+    // Override for moz
+    &::-moz-range-track {
         width: 100%;
-        height: 8.4px;
-        cursor: pointer;
-        box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-        background: #3071a9;
-        border-radius: 1.3px;
-        border: 0.2px solid #010101;
+        height: 5px;
+        background: $color-brand-primary;
+        border-radius: 3px;
+        @include transition($global-animation);
     }
 
+    &:hover::-moz-range-track,
+    &:focus::-moz-range-track {
+        background-color: darken($color-brand-primary, 6%);
+    }
+
+    // Override for ms
+    &::-ms-track {
+        width: 100%;
+        height: 5px;
+        background: $color-brand-primary;
+        border-radius: 3px;
+        @include transition($global-animation);
+    }
+
+    &::-ms-fill-lower{       // Applies to lower (filled) part of track
+        background: $color-brand-primary;
+        border-radius: 3px;
+    }
+
+    &::-ms-fill-upper {     // Applies to upper (empty) part of track
+      background: $color-brand-bkg;
+      border-radius: 3px;
+    }
+
+    &:hover::-ms-fill-lower,
+    &:focus::-ms-fill-lower {
+        background-color: darken($color-brand-primary, 6%);
+    }
+
+    &:hover::-ms-fill-upper,
+    &:focus::-ms-fill-upper {
+        background-color: darken($color-brand-bkg, 6%);
+    }
+
+    /*
+        Overrides range thumb style
+     */
+
+    // Override for webkit
     &::-webkit-slider-thumb {
         -webkit-appearance: none;
         cursor: pointer;
@@ -426,46 +481,29 @@ input[type=range] {
         box-shadow: 0px 0px 0px 10px rgba(0, 0, 0, 0.06);
     }
 
-
-
+    // Override for moz
     &::-moz-range-thumb {
-      box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-      border: 1px solid #000000;
-      height: 36px;
-      width: 16px;
-      border-radius: 3px;
-      background: #ffffff;
-      cursor: pointer;
-      -webkit-appearance: none;
-      margin-top: -14px;
+        -webkit-appearance: none;
+        cursor: pointer;
+        height: 1rem;
+        width: 1rem;
+        border-radius: 100%;
+        background: $color-brand-primary;
+        margin-top: -0.3rem;
+        border: 2px solid $color-ui-white;
+        @include transition($global-animation)
     }
 
-    &::-ms-track {
-      width: 100%;
-      height: 8.4px;
-      cursor: pointer;
-      animate: 0.2s;
-      background: transparent;
-      border-color: transparent;
-      border-width: 16px 0;
-      color: transparent;
-    }
-
-    &::-ms-fill-lower,
-    &::-ms-fill-upper {
-      background: #2a6495;
-      border: 0.2px solid #010101;
-      border-radius: 2.6px;
-      box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-    }
-
+    // Override for ms
     &::-ms-thumb {
-      box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-      border: 1px solid #000000;
-      height: 36px;
-      width: 16px;
-      border-radius: 3px;
-      background: #ffffff;
-      cursor: pointer;
+        -webkit-appearance: none;
+        cursor: pointer;
+        height: 1rem;
+        width: 1rem;
+        border-radius: 100%;
+        background: $color-brand-primary;
+        margin-top: -0.3rem;
+        border: 2px solid $color-ui-white;
+        @include transition($global-animation)
     }
 }
