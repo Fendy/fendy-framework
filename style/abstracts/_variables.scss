@@ -1,12 +1,14 @@
 //------------------------------------------------------------------------------
 //  This file contains variables used globally
 //------------------------------------------------------------------------------
+//  CONTENT:
 //  Generic............................Commonly used values
 //  Color..............................Color palette
 //  Typography.........................Values for typography
 //  Breakpoints........................Breakpoints variables
 //  Grid...............................Grid related values
 //  List..............................Values for lists
+//  Input.............................Values for input component
 //  Button............................Values for button component
 
 /*********************************\
@@ -230,6 +232,26 @@ $list-inline-gap: 5px;
 
 
 /*********************************\
+    #INPUT
+\*********************************/
+/**
+ *    Border radius for rounded cornered inputs
+ *    Used with modifier -rounded
+ *    @type {number}
+ */
+$input-border-radius: 5px;
+
+/**
+ *    Size of the border for ghost inputs
+ *    @type {number}
+ */
+$input-border: 2px;
+
+
+
+
+
+/*********************************\
     #BUTTON
 \*********************************/
 
@@ -259,29 +281,3 @@ $button-hover-opacity: 10%;
  *    Different than -rounded modifier of buttons
  */
 $button-border-radius: 5px;
-
-
-
-
-
-/*********************************\
-    #INPUT
-\*********************************/
-
-/**
- *    Size of the 'border' of inputs
- *    In order to keep inputs of the same size this will be used for
- *    an inset shadow instead of an actual border
- *    @type {number}
- */
-$input-border: 1.5px;
-
-
-
-
-
-/**
- *    Border radius for your inputs
- *    Different than -rounded modifier of input
- */
-$input-border-radius: 1px;
