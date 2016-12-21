@@ -85,29 +85,253 @@ select, .input-select{
  *    Define 'textfield' inputs base style
  *    By dafault, 'textfield' like inputs will present a border bottom
  */
-input[type="text"], .input-text,
-input[type="password"], .input-password,
-input[type="date"], .input-date,
-input[type="datetime-local"], .input-datetime-local,
-input[type="email"], .input-email,
-input[type="file"], .input-file,
-input[type="month"], .input-month,
-input[type="number"], .input-number,
-input[type="search"], .input-search,
-input[type="select"], .input-select,
-input[type="tel"], .input-tel,
-input[type="time"], .input-time,
-input[type="url"], .input-url,
-input[type="week"], .input-week{
+input[type="text"], .textfield,
+input[type="password"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="file"],
+input[type="month"],
+input[type="number"],
+input[type="search"],
+input[type="select"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+input[type="week"]{
     padding: 10px 15px 7px 0;
     max-width: 100%;
-    border-bottom: 2px solid $color-ui-grey;
+    border-bottom: $input-border solid $color-ui-grey;
 
     &.is-disabled,
     &[disabled],
     &[disbled="true"]{
         cursor: not-allowed;
         border-color: $color-ui-grey-light;
+    }
+}
+
+/**
+ *    Creates variation for 'textfield' inputs
+ *    Color filled inputs
+ */
+input[type="text"].input--filled, .input--filled.textfield,
+input[type="password"].input--filled,
+input[type="date"].input--filled,
+input[type="datetime-local"].input--filled,
+input[type="email"].input--filled,
+input[type="file"].input--filled,
+input[type="month"].input--filled,
+input[type="number"].input--filled,
+input[type="search"].input--filled,
+input[type="select"].input--filled,
+input[type="tel"].input--filled,
+input[type="time"].input--filled,
+input[type="url"].input--filled,
+input[type="week"].input--filled{
+    /*
+        Default styles
+        By default, color darkens 6% on hover/focus
+     */
+    border: 0;
+    background-color: $color-ui-grey;
+    padding: 7px 15px 7px;
+    @include transition($global-animation);
+
+    &:hover,
+    &:focus{
+        background-color: darken($color-ui-grey, 6%);
+    }
+
+    &.is-disabled,
+    &[disabled],
+    &[disbled="true"]{
+        cursor: not-allowed;
+        background-color: $color-ui-grey-light;
+    }
+
+    /*
+        Shape modifiers
+     */
+    &.-rounded{
+        border-radius: $input-border-radius;
+    }
+
+    &.-pill{
+        border-radius: 20em;
+    }
+
+    /*
+        Overrides color of input placeholder text for filled variation of input
+     */
+    &[class$="-fill"]::-webkit-input-placeholder {   color: $color-text-white; }
+    &[class$="-fill"]::-moz-placeholder {            color: $color-text-white; }
+    &[class$="-fill"]:-ms-input-placeholder {        color: $color-text-white; }
+    &[class$="-fill"]:-moz-placeholder {        color: $color-text-white; }
+    &[class*="is-"]::-webkit-input-placeholder {   color: $color-text-white; }
+    &[class*="is-"]::-moz-placeholder {            color: $color-text-white; }
+    &[class*="is-"]:-ms-input-placeholder {        color: $color-text-white; }
+    &[class*="is-"]:-moz-placeholder {             color: $color-text-white; }
+
+    /*
+        Color modifiers
+     */
+    &.-black-fill{
+        color: $color-text-white;
+        background-color: $color-ui-black;
+        &:hover, &:focus{ background-color: darken($color-ui-black, 6%);}
+    }
+
+    &.-white-fill{
+        color: $color-text;
+        background-color: $color-ui-white;
+        &:hover, &:focus{ background-color: darken($color-ui-white, 6%);}
+
+        &::-webkit-input-placeholder {   color: $color-ui-placeholder; }
+        &::-moz-placeholder {            color: $color-ui-placeholder; }
+        &:-ms-input-placeholder {        color: $color-ui-placeholder; }
+        &:-moz-placeholder {        color: $color-ui-placeholder; }
+    }
+
+    &.-primary-fill{
+        color: $color-text-white;
+        background-color: $color-brand-primary;
+        &:hover, &:focus{ background-color: darken($color-brand-primary, 6%);}
+    }
+
+    &.-secondary-fill{
+        color: $color-text-white;
+        background-color: $color-brand-secondary;
+        &:hover, &:focus{ background-color: darken($color-brand-secondary, 6%);}
+    }
+
+    /*
+        State modifiers
+     */
+    &.is-valid{
+        color: $color-text-white;
+        background-color: $color-ui-success;
+        &:hover, &:focus{ background-color: darken($color-ui-success, 6%);}
+    }
+
+    &.is-incomplete{
+        color: $color-text-white;
+        background-color: $color-ui-warning;
+        &:hover, &:focus{ background-color: darken($color-ui-warning, 6%);}
+    }
+
+    &.is-invalid{
+        color: $color-text-white;
+        background-color: $color-ui-error;
+        &:hover, &:focus{ background-color: darken($color-ui-error, 6%);}
+    }
+}
+
+
+
+
+
+/**
+ *    Creates variation for 'textfield' inputs
+ *    Bordered inputs that fill on hover/focus
+ */
+input[type="text"].input--ghost, .input--ghost.textfield,
+input[type="password"].input--ghost,
+input[type="date"].input--ghost,
+input[type="datetime-local"].input--ghost,
+input[type="email"].input--ghost,
+input[type="file"].input--ghost,
+input[type="month"].input--ghost,
+input[type="number"].input--ghost,
+input[type="search"].input--ghost,
+input[type="select"].input--ghost,
+input[type="tel"].input--ghost,
+input[type="time"].input--ghost,
+input[type="url"].input--ghost,
+input[type="week"].input--ghost{
+    /*
+        Default styles
+        By default, color darkens 6% on hover/focus
+     */
+    border: $input-border solid $color-ui-grey;
+    padding: 7px 15px 7px;
+    @include transition($global-animation);
+
+    &:hover,
+    &:focus{
+        background-color: $color-ui-grey;
+    }
+
+    /*
+        Shape modifiers
+     */
+    &.-rounded{
+        border-radius: $input-border-radius;
+    }
+
+    &.-pill{
+        border-radius: 20em;
+    }
+
+    /*
+        Overrides color of input placeholder text for filled variation of input
+     */
+    &[class$="-fill"]::-webkit-input-placeholder {   color: $color-text-white; }
+    &[class$="-fill"]::-moz-placeholder {            color: $color-text-white; }
+    &[class$="-fill"]:-ms-input-placeholder {        color: $color-text-white; }
+    &[class$="-fill"]:-moz-placeholder {        color: $color-text-white; }
+    &[class*="is-"]::-webkit-input-placeholder {   color: $color-text-white; }
+    &[class*="is-"]::-moz-placeholder {            color: $color-text-white; }
+    &[class*="is-"]:-ms-input-placeholder {        color: $color-text-white; }
+    &[class*="is-"]:-moz-placeholder {             color: $color-text-white; }
+
+    /*
+        Color modifiers
+     */
+    &.-black-ghost{
+        border-color: $color-ui-black;
+        &:hover, &:focus{ background-color: $color-ui-black;}
+    }
+
+    &.-white-ghost{
+        border-color: $color-ui-white;
+        &:hover, &:focus{ background-color: $color-ui-white,;}
+
+        &::-webkit-input-placeholder {   color: $color-ui-placeholder; }
+        &::-moz-placeholder {            color: $color-ui-placeholder; }
+        &:-ms-input-placeholder {        color: $color-ui-placeholder; }
+        &:-moz-placeholder {        color: $color-ui-placeholder; }
+    }
+
+    &.-primary-ghost{
+        border-color: $color-brand-primary;
+        &:hover, &:focus{ background-color: $color-brand-primary;}
+    }
+
+    &.-secondary-ghost{
+        border-color: $color-brand-secondary;
+        &:hover, &:focus{ background-color: $color-brand-secondary;}
+    }
+
+    /*
+        State modifiers
+     */
+    &.is-valid{
+        color: $color-text-white;
+        background-color: $color-ui-success;
+        &:hover, &:focus{ background-color: darken($color-ui-success, 6%);}
+    }
+
+    &.is-incomplete{
+        color: $color-text-white;
+        background-color: $color-ui-warning;
+        &:hover, &:focus{ background-color: darken($color-ui-warning, 6%);}
+    }
+
+    &.is-invalid{
+        color: $color-text-white;
+        background-color: $color-ui-error;
+        &:hover, &:focus{ background-color: darken($color-ui-error, 6%);}
     }
 }
 
@@ -267,7 +491,7 @@ select, .input-select{
     background-color: transparent;
     padding: 10px 3rem 7px 0;
     max-width: 100%;
-    border-bottom: 2px solid $color-ui-grey;
+    border-bottom: $input-border solid $color-ui-grey;
 
     /**
      *    Creates chevron using pure css
@@ -284,6 +508,19 @@ select, .input-select{
         background-repeat: no-repeat;
     }
 }
+
+
+
+
+
+/**
+ *    Creates variation of select input with color fill
+ */
+.input-select--filled{
+    @extend .input--filled.textfield;
+    padding: 7px 3rem 7px 1rem;
+}
+
 
 
 
@@ -472,7 +709,7 @@ input[type=range] {
         border-radius: 100%;
         background: $color-brand-primary;
         margin-top: -0.3rem;
-        border: 2px solid $color-ui-white;
+        border: $input-border solid $color-ui-white;
         @include transition($global-animation)
     }
 
@@ -490,7 +727,7 @@ input[type=range] {
         border-radius: 100%;
         background: $color-brand-primary;
         margin-top: -0.3rem;
-        border: 2px solid $color-ui-white;
+        border: $input-border solid $color-ui-white;
         @include transition($global-animation)
     }
 
@@ -503,7 +740,7 @@ input[type=range] {
         border-radius: 100%;
         background: $color-brand-primary;
         margin-top: -0.3rem;
-        border: 2px solid $color-ui-white;
+        border: $input-border solid $color-ui-white;
         @include transition($global-animation)
     }
 }
