@@ -1,2 +1,2 @@
-# brand-and-style
+# Fendy
 Your brand identity coded into your every project
