@@ -1,0 +1,758 @@
+//------------------------------------------------------------------------------
+//  This file contains all styles related to the input component
+//------------------------------------------------------------------------------
+//  CONTENT:
+//  1. Labels
+//  2. Base input
+//  3. Textfield-like inputs
+//  4. Checkboxes
+//  5. Radio buttons
+//  6. Selects
+//  7. Files
+//  8. Colors
+//  9. Dates
+//  10. Ranges
+
+
+
+
+
+/*******************************************************************\
+    #Labels
+\*******************************************************************/
+
+/**
+ *    Set pointer cursor for labels assigned to an input
+ */
+label{
+    cursor: pointer;
+}
+
+
+
+
+
+/*******************************************************************\
+    #Base input
+\*******************************************************************/
+
+/**
+ *    Overrides default color of input placeholder text
+ */
+::-webkit-input-placeholder {   color: $color-ui-placeholder; }
+::-moz-placeholder {            color: $color-ui-placeholder; }
+:-ms-input-placeholder {        color: $color-ui-placeholder; }
+input:-moz-placeholder {        color: $color-ui-placeholder; }
+
+
+
+
+
+/**
+ *    Reset base input styles
+ */
+input, .input,
+select, .input-select{
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    vertical-align: middle;
+
+    /*
+        Define style for disabled state
+     */
+    &.is-disabled,
+    &[disabled],
+    &[disbled="true"]{
+        cursor: not-allowed;
+
+        &::-webkit-input-placeholder {   color: $color-text-lightest; }
+        &::-moz-placeholder {            color: $color-text-lightest; }
+        &:-ms-input-placeholder {        color: $color-text-lightest; }
+        &:-moz-placeholder {             color: $color-text-lightest; }
+    }
+}
+
+
+
+
+
+/*******************************************************************\
+    #Textfield-like inputs
+\*******************************************************************/
+
+/**
+ *    Define 'textfield' inputs base style
+ *    By dafault, 'textfield' like inputs will present a border bottom
+ */
+input[type="text"], .textfield,
+input[type="password"],
+input[type="date"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="file"],
+input[type="month"],
+input[type="number"],
+input[type="search"],
+input[type="select"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+input[type="week"]{
+    padding: 10px 15px 7px 0;
+    max-width: 100%;
+    border-bottom: $input-border solid $color-ui-grey;
+
+    &.is-disabled,
+    &[disabled],
+    &[disbled="true"]{
+        cursor: not-allowed;
+        border-color: $color-ui-grey-light;
+    }
+}
+
+/**
+ *    Creates variation for 'textfield' inputs
+ *    Color filled inputs
+ */
+input[type="text"].input--filled, .input--filled.textfield,
+input[type="password"].input--filled,
+input[type="date"].input--filled,
+input[type="datetime-local"].input--filled,
+input[type="email"].input--filled,
+input[type="file"].input--filled,
+input[type="month"].input--filled,
+input[type="number"].input--filled,
+input[type="search"].input--filled,
+input[type="select"].input--filled,
+input[type="tel"].input--filled,
+input[type="time"].input--filled,
+input[type="url"].input--filled,
+input[type="week"].input--filled{
+    /*
+        Default styles
+        By default, color darkens 6% on hover/focus
+     */
+    border: 0;
+    background-color: $color-ui-grey;
+    padding: 7px 15px 7px;
+    @include transition($global-animation);
+
+    &:hover,
+    &:focus{
+        background-color: darken($color-ui-grey, 6%);
+    }
+
+    &.is-disabled,
+    &[disabled],
+    &[disbled="true"]{
+        cursor: not-allowed;
+        background-color: $color-ui-grey-light;
+    }
+
+    /*
+        Shape modifiers
+     */
+    &.-rounded{
+        border-radius: $input-border-radius;
+    }
+
+    &.-pill{
+        border-radius: 20em;
+    }
+
+    /*
+        Overrides color of input placeholder text for filled variation of input
+     */
+    &[class$="-fill"]::-webkit-input-placeholder {   color: $color-text-white; }
+    &[class$="-fill"]::-moz-placeholder {            color: $color-text-white; }
+    &[class$="-fill"]:-ms-input-placeholder {        color: $color-text-white; }
+    &[class$="-fill"]:-moz-placeholder {        color: $color-text-white; }
+    &[class*="is-"]::-webkit-input-placeholder {   color: $color-text-white; }
+    &[class*="is-"]::-moz-placeholder {            color: $color-text-white; }
+    &[class*="is-"]:-ms-input-placeholder {        color: $color-text-white; }
+    &[class*="is-"]:-moz-placeholder {             color: $color-text-white; }
+
+    /*
+        Color modifiers
+     */
+    &.-black-fill{
+        color: $color-text-white;
+        background-color: $color-ui-black;
+        &:hover, &:focus{ background-color: darken($color-ui-black, 6%);}
+    }
+
+    &.-white-fill{
+        color: $color-text;
+        background-color: $color-ui-white;
+        &:hover, &:focus{ background-color: darken($color-ui-white, 6%);}
+
+        &::-webkit-input-placeholder {   color: $color-ui-placeholder; }
+        &::-moz-placeholder {            color: $color-ui-placeholder; }
+        &:-ms-input-placeholder {        color: $color-ui-placeholder; }
+        &:-moz-placeholder {        color: $color-ui-placeholder; }
+    }
+
+    &.-primary-fill{
+        color: $color-text-white;
+        background-color: $color-brand-primary;
+        &:hover, &:focus{ background-color: darken($color-brand-primary, 6%);}
+    }
+
+    &.-secondary-fill{
+        color: $color-text-white;
+        background-color: $color-brand-secondary;
+        &:hover, &:focus{ background-color: darken($color-brand-secondary, 6%);}
+    }
+
+    /*
+        State modifiers
+     */
+    &.is-valid{
+        color: $color-text-white;
+        background-color: $color-ui-success;
+        &:hover, &:focus{ background-color: darken($color-ui-success, 6%);}
+    }
+
+    &.is-incomplete{
+        color: $color-text-white;
+        background-color: $color-ui-warning;
+        &:hover, &:focus{ background-color: darken($color-ui-warning, 6%);}
+    }
+
+    &.is-invalid{
+        color: $color-text-white;
+        background-color: $color-ui-error;
+        &:hover, &:focus{ background-color: darken($color-ui-error, 6%);}
+    }
+}
+
+
+
+
+
+/**
+ *    Creates variation for 'textfield' inputs
+ *    Bordered inputs that fill on hover/focus
+ */
+input[type="text"].input--ghost, .input--ghost.textfield,
+input[type="password"].input--ghost,
+input[type="date"].input--ghost,
+input[type="datetime-local"].input--ghost,
+input[type="email"].input--ghost,
+input[type="file"].input--ghost,
+input[type="month"].input--ghost,
+input[type="number"].input--ghost,
+input[type="search"].input--ghost,
+input[type="select"].input--ghost,
+input[type="tel"].input--ghost,
+input[type="time"].input--ghost,
+input[type="url"].input--ghost,
+input[type="week"].input--ghost{
+    /*
+        Default styles
+        By default, color darkens 6% on hover/focus
+     */
+    border: $input-border solid $color-ui-grey;
+    padding: 7px 15px 7px;
+    @include transition($global-animation);
+
+    &:hover,
+    &:focus{
+        background-color: $color-ui-grey;
+    }
+
+    /*
+        Shape modifiers
+     */
+    &.-rounded{
+        border-radius: $input-border-radius;
+    }
+
+    &.-pill{
+        border-radius: 20em;
+    }
+
+    /*
+        Overrides color of input placeholder text for filled variation of input
+     */
+    &[class$="-fill"]::-webkit-input-placeholder {   color: $color-text-white; }
+    &[class$="-fill"]::-moz-placeholder {            color: $color-text-white; }
+    &[class$="-fill"]:-ms-input-placeholder {        color: $color-text-white; }
+    &[class$="-fill"]:-moz-placeholder {        color: $color-text-white; }
+    &[class*="is-"]::-webkit-input-placeholder {   color: $color-text-white; }
+    &[class*="is-"]::-moz-placeholder {            color: $color-text-white; }
+    &[class*="is-"]:-ms-input-placeholder {        color: $color-text-white; }
+    &[class*="is-"]:-moz-placeholder {             color: $color-text-white; }
+
+    /*
+        Color modifiers
+     */
+    &.-black-ghost{
+        border-color: $color-ui-black;
+        &:hover, &:focus{ background-color: $color-ui-black;}
+    }
+
+    &.-white-ghost{
+        border-color: $color-ui-white;
+        &:hover, &:focus{ background-color: $color-ui-white,;}
+
+        &::-webkit-input-placeholder {   color: $color-ui-placeholder; }
+        &::-moz-placeholder {            color: $color-ui-placeholder; }
+        &:-ms-input-placeholder {        color: $color-ui-placeholder; }
+        &:-moz-placeholder {        color: $color-ui-placeholder; }
+    }
+
+    &.-primary-ghost{
+        border-color: $color-brand-primary;
+        &:hover, &:focus{ background-color: $color-brand-primary;}
+    }
+
+    &.-secondary-ghost{
+        border-color: $color-brand-secondary;
+        &:hover, &:focus{ background-color: $color-brand-secondary;}
+    }
+
+    /*
+        State modifiers
+     */
+    &.is-valid{
+        color: $color-text-white;
+        background-color: $color-ui-success;
+        &:hover, &:focus{ background-color: darken($color-ui-success, 6%);}
+    }
+
+    &.is-incomplete{
+        color: $color-text-white;
+        background-color: $color-ui-warning;
+        &:hover, &:focus{ background-color: darken($color-ui-warning, 6%);}
+    }
+
+    &.is-invalid{
+        color: $color-text-white;
+        background-color: $color-ui-error;
+        &:hover, &:focus{ background-color: darken($color-ui-error, 6%);}
+    }
+}
+
+
+
+
+
+/*******************************************************************\
+    #Checkboxes
+\*******************************************************************/
+
+/**
+ *    Style checkbox input
+ *    Hide default checkbox "box" and replace it with costum one
+ */
+input[type="checkbox"], .input-checkbox{
+    width: 1.35rem;
+    height: 1.35rem;
+    position: relative;
+    visibility: hidden;
+    vertical-align: sub;
+
+    /*
+        This is the box
+     */
+    &:before{
+        content: '';
+        @include transition($global-animation);
+        visibility: visible;
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 3px;
+        background-color: $color-ui-grey;
+    }
+
+    /*
+        This is the check in pure css
+     */
+    &:after{
+        content: '';
+        @include transition($global-animation);
+        position: absolute;
+        top: 48%;
+        left: 25%;
+        visibility: visible;
+        display: block;
+        width: 30%;
+        height: 60%;
+        border: solid $color-ui-white;
+        border-width: 0 0.18em 0.18em 0;
+        @include transform(rotate(45deg) translate(-50%, -50%));
+    }
+
+    /*
+        Change colors when box is checked
+     */
+    &:checked{
+        &:before{ background-color: $color-brand-primary; }
+        &:after{ border-color: $color-ui-white; }
+    }
+
+    /*
+        Modifier to create a circle box
+     */
+    &.-rounded{
+        &:before{ border-radius: 100%; }
+    }
+}
+
+
+
+
+
+/*******************************************************************\
+    #Radio buttons
+\*******************************************************************/
+
+/**
+ *    Style radio button
+ *    @type {String}
+ */
+input[type="radio"], .input-radio{
+    width: 1.5rem;
+    height: 1.5rem;
+    position: relative;
+    visibility: hidden;
+    vertical-align: sub;
+
+    /*
+        This is the box
+     */
+    &:before{
+        content: '';
+        @include transition($global-animation);
+        visibility: visible;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        border: 3px solid $color-ui-grey;
+        border-radius: 100%;
+    }
+
+    /*
+        This is the check in pure css
+     */
+    &:after{
+        content: '';
+        @include transition($global-animation);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        visibility: hidden;
+        display: inline-block;
+        width: 0.813em;
+        height: 0.813em;
+        border-radius: 100%;
+        background-color: $color-ui-grey;
+        @include transform(translate(-50%, -50%) scale(0, 0));
+    }
+
+    &:hover{
+        &:after{
+            visibility: visible;
+            @include transform(translate(-50%, -50%) scale(0.7, 0.7));
+        }
+    }
+
+    /*
+        Change colors when box is checked
+     */
+    &:checked{
+        &:before{ border-color: $color-brand-primary; }
+        &:after{
+            visibility: visible;
+            @include transform(translate(-50%, -50%) scale(1, 1));
+            background-color: $color-brand-primary;
+        }
+    }
+}
+
+
+
+
+
+/*******************************************************************\
+    #Selects
+\*******************************************************************/
+
+/**
+ *    Define style for select input
+ */
+select, .input-select{
+    padding: 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: transparent;
+    padding: 10px 3rem 7px 0;
+    max-width: 100%;
+    border-bottom: $input-border solid $color-ui-grey;
+
+    /**
+     *    Creates chevron using pure css
+     */
+    background-image: linear-gradient(45deg, transparent 50%, $color-text 50%), linear-gradient(135deg, $color-text 50%, transparent 50%);
+    background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 13.6px) calc(1em + 2px);
+    background-size: 5px 5px, 6.5px 5px;
+    background-repeat: no-repeat;
+
+    &.-circular-chevron{
+        background-image: linear-gradient(45deg, transparent 50%, $color-text 50%), linear-gradient(135deg, $color-text 50%, transparent 50%), radial-gradient($color-ui-grey 70%, transparent 72%);
+        background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 13.6px) calc(1em + 2px), calc(100% - .5em) .5em;
+        background-size: 5px 5px, 6.5px 5px, 1.5em 1.5em;
+        background-repeat: no-repeat;
+    }
+}
+
+
+
+
+
+/**
+ *    Creates variation of select input with color fill
+ */
+.input-select--filled{
+    @extend .input--filled.textfield;
+    padding: 7px 3rem 7px 1rem;
+}
+
+
+
+
+
+/**
+ *    Creates variation of select input with border
+ */
+.input-select--ghost{
+    @extend .input--ghost.textfield;
+    padding: 7px 3rem 7px 1rem;
+}
+
+
+
+
+
+
+/*******************************************************************\
+    #Files
+\*******************************************************************/
+
+/**
+ *    Define style for file input
+ *    1) Hide ugly default upload button
+ *    2) Create pseudoelement to show icon or counter to be implemented using JS
+ */
+input[type="file"], .input-file{
+    overflow: hidden;
+    position: relative;
+    min-width: 10rem;
+
+    &::-webkit-file-upload-button{  // [ 1 ]
+      visibility: hidden;
+      opacity: 0;
+      width: 2rem;
+    }
+
+    &:before{      // [ 2 ]
+        content: '';
+        opacity: 1;
+        display: inline-block;
+        width: 1.5rem;
+        height: 1.5rem;
+        background-image: radial-gradient(#ddd 70%, transparent 72%);
+        background-position: 0;
+        background-size: 1.5rem 1.5rem;
+        background-repeat: no-repeat;
+        vertical-align: middle;
+    }
+}
+
+
+
+
+
+/*******************************************************************\
+    #Colors
+\*******************************************************************/
+
+/**
+ *    Defines style for color input
+ */
+input[type="color"]{
+    background-color: transparent;
+    border: none;
+    padding: 0 15px 0 0;
+    max-width: 100%;
+    min-height: 30px;
+    vertical-align: middle;
+}
+
+/**
+ *    Overrides default browser behaviour
+ *    1) Overrides user agent appearance to create a circle
+ */
+::-webkit-color-swatch-wrapper { padding: 0; }
+::-webkit-color-swatch {    // [ 1 ]
+    border: none;
+    border-radius: 100%;
+    width: 33px;
+    height: 29px;
+}
+
+
+
+
+
+/*******************************************************************\
+    #Dates
+\*******************************************************************/
+
+/**
+ *    Overrides default browser behaviour
+ *    1) Hide input spin control only for date related inputs
+ */
+::-webkit-datetime-edit { padding: 0; width: 100%; }    // Outter input box
+::-webkit-datetime-edit-fields-wrapper { width: 100%; } // Inside input box
+::-webkit-datetime-edit-text { padding: 5px; }          // Field text
+::-webkit-datetime-edit-month-field { }                 // Specific for month field
+::-webkit-datetime-edit-day-field {  }                  // Specific for day field
+::-webkit-datetime-edit-year-field {  }                 // Specific for year field
+::-webkit-calendar-picker-indicator { background: transparent; }    // Picker box
+input[type="date"]::-webkit-inner-spin-button,
+input[type="datetime-local"]::-webkit-inner-spin-button,
+input[type="month"]::-webkit-inner-spin-button,
+input[type="week"]::-webkit-inner-spin-button { display: none; }    // [ 1 ]
+
+
+
+
+
+/*******************************************************************\
+    #Ranges
+\*******************************************************************/
+
+/**
+ *    Override style for input range
+ */
+input[type=range] {
+    -webkit-appearance: none;
+    outline: none;
+    margin: 18px 0;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    /*
+        Overrides range track style
+     */
+
+    // Override for webkit
+    &::-webkit-slider-runnable-track{
+        width: 100%;
+        height: 5px;
+        background: $color-brand-primary;
+        border-radius: 3px;
+        @include transition($global-animation);
+    }
+
+    &:hover::-webkit-slider-runnable-track,
+    &:focus::-webkit-slider-runnable-track {
+        background-color: darken($color-brand-primary, 6%);
+    }
+
+    // Override for moz
+    &::-moz-range-track {
+        width: 100%;
+        height: 5px;
+        background: $color-brand-primary;
+        border-radius: 3px;
+        @include transition($global-animation);
+    }
+
+    &:hover::-moz-range-track,
+    &:focus::-moz-range-track {
+        background-color: darken($color-brand-primary, 6%);
+    }
+
+    // Override for ms
+    &::-ms-track {
+        width: 100%;
+        height: 5px;
+        background: $color-brand-primary;
+        border-radius: 3px;
+        @include transition($global-animation);
+    }
+
+    &::-ms-fill-lower{       // Applies to lower (filled) part of track
+        background: $color-brand-primary;
+        border-radius: 3px;
+    }
+
+    &::-ms-fill-upper {     // Applies to upper (empty) part of track
+      background: $color-brand-bkg;
+      border-radius: 3px;
+    }
+
+    &:hover::-ms-fill-lower,
+    &:focus::-ms-fill-lower {
+        background-color: darken($color-brand-primary, 6%);
+    }
+
+    &:hover::-ms-fill-upper,
+    &:focus::-ms-fill-upper {
+        background-color: darken($color-brand-bkg, 6%);
+    }
+
+    /*
+        Overrides range thumb style
+     */
+
+    // Override for webkit
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        cursor: pointer;
+        height: 1rem;
+        width: 1rem;
+        border-radius: 100%;
+        background: $color-brand-primary;
+        margin-top: -0.3rem;
+        border: $input-border solid $color-ui-white;
+        @include transition($global-animation)
+    }
+
+    &:hover::-webkit-slider-thumb,
+    &:focus::-webkit-slider-thumb {
+        box-shadow: 0px 0px 0px 10px rgba(0, 0, 0, 0.06);
+    }
+
+    // Override for moz
+    &::-moz-range-thumb {
+        -webkit-appearance: none;
+        cursor: pointer;
+        height: 1rem;
+        width: 1rem;
+        border-radius: 100%;
+        background: $color-brand-primary;
+        margin-top: -0.3rem;
+        border: $input-border solid $color-ui-white;
+        @include transition($global-animation)
+    }
+
+    // Override for ms
+    &::-ms-thumb {
+        -webkit-appearance: none;
+        cursor: pointer;
+        height: 1rem;
+        width: 1rem;
+        border-radius: 100%;
+        background: $color-brand-primary;
+        margin-top: -0.3rem;
+        border: $input-border solid $color-ui-white;
+        @include transition($global-animation)
+    }
+}
