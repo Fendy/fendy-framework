@@ -525,6 +525,18 @@ select, .input-select{
 
 
 
+/**
+ *    Creates variation of select input with border
+ */
+.input-select--ghost{
+    @extend .input--ghost.textfield;
+    padding: 7px 3rem 7px 1rem;
+}
+
+
+
+
+
 
 /*******************************************************************\
     #Files
